@@ -37,3 +37,7 @@ Las demos `jk.html` y `t.html` incluyen flanco ascendente y descendente, solo Q,
 `node --test tests/logic.test.cjs`
 
 Las fuentes de Google son opcionales; si no hay conexión se usan las fuentes del sistema.
+
+## Proyección
+
+En pantallas panorámicas se usa un lienzo común de 1600×900, escalado proporcionalmente al ancho y alto disponibles. El ajuste se recalcula al redimensionar o entrar en pantalla completa; no depende de una resolución física concreta. En pantallas más estrechas se mantiene la distribución adaptable con desplazamiento. `projection.js` gestiona este ajuste en el índice y todas las demos.

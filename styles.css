@@ -156,3 +156,86 @@ body:not([data-demo]) #initial-state span{font:inherit;color:inherit}
 
 /* Estado inicial RS en dos filas. */
 body:not([data-demo]) #initial-state{flex-direction:column;align-items:flex-start;gap:8px}
+
+/* Lienzo de proyección común: 1600 × 900, escalado al área real del navegador. */
+body.projection-mode{overflow:hidden}
+.projection-mode .projection-stage{position:fixed;left:50%;top:50%;width:1600px;height:900px;transform-origin:center;display:flex;flex-direction:column}
+.projection-mode .topbar{height:54px;min-height:54px;padding:0 48px;flex-wrap:nowrap}
+.projection-mode .brand{font-size:27px}.projection-mode .brand-icon{width:34px;height:34px;font-size:33px}
+.projection-mode .topbar .top-label{display:none}
+.projection-mode .demo-nav a{font-size:13px;padding:8px 14px}
+.projection-mode main{width:100%;max-width:none;flex:1;min-height:0;padding:0 36px;display:flex;flex-direction:column}
+.projection-mode .breadcrumb{padding-top:13px;font-size:11px}
+.projection-mode .intro{padding:19px 0 22px;flex-shrink:0}
+.projection-mode .intro .eyebrow{font-size:10px;margin-bottom:9px}
+.projection-mode h1{font-size:36px;line-height:1.1;letter-spacing:-1.2px}
+.projection-mode .lead{font-size:13px;line-height:1.5;margin-top:10px}
+.projection-mode .circuit{height:108px;margin-right:85px}
+.projection-mode .chip{width:90px;height:90px;font-size:30px}
+.projection-mode .wire.r{top:26px}.projection-mode .wire.s{bottom:25px}
+.projection-mode .lab-layout{flex:1;min-height:0;grid-template-columns:310px minmax(0,1fr);gap:20px;align-items:stretch}
+.projection-mode .settings{padding:20px;display:block}
+.projection-mode .settings>.eyebrow,.projection-mode .workspace-heading .eyebrow{font-size:10px;margin-bottom:9px}
+.projection-mode .settings h2,.projection-mode .workspace h2{font-size:23px}
+.projection-mode .muted{font-size:12px;margin:8px 0 15px}
+.projection-mode .variants{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.projection-mode .variant{padding:11px 10px}
+.projection-mode .variant span{font-size:12px}.projection-mode .variant small{font-size:10px;margin-top:5px}
+.projection-mode .variant.active:after{top:12px;right:6px;font-size:8px}
+.projection-mode .rule-title{font-size:10px;margin:19px 0 10px}
+.projection-mode .settings table{font-size:11px}
+.projection-mode .settings td,.projection-mode .settings th{padding-top:8px;padding-bottom:8px}
+.projection-mode .settings table thead th{padding-top:9px;padding-bottom:9px}
+.projection-mode .note{font-size:11px;line-height:1.5;margin:11px 0}
+.projection-mode .initial{margin:15px 0 11px;padding:11px;gap:7px}
+.projection-mode .workspace{padding:20px 24px 0;display:flex;flex-direction:column;min-height:0}
+.projection-mode .workspace-heading,.projection-mode .exercise-meta,.projection-mode .toolbar,.projection-mode .drawing-help,.projection-mode .legend,.projection-mode .check-area{flex-shrink:0}
+.projection-mode .exercise-meta{font-size:11px;margin:16px 0;padding-bottom:12px}
+.projection-mode .toolbar{font-size:12px;gap:14px;flex-wrap:nowrap}
+.projection-mode .drawing-help{font-size:11px;margin:12px 0 17px}
+.projection-mode .chart-scroll{flex:1;min-height:0;overflow:visible;padding-right:10px}
+.projection-mode .chart{height:100%;min-width:0;grid-template-columns:54px minmax(0,1fr);grid-template-rows:20px repeat(var(--signal-count,4),minmax(0,1fr));row-gap:10px}
+.projection-mode .signal-track{height:100%;background:linear-gradient(to bottom,transparent 23.68%,#edf0ee 23.68%,#edf0ee calc(23.68% + 1px),transparent calc(23.68% + 1px),transparent 76.32%,#edf0ee 76.32%,#edf0ee calc(76.32% + 1px),transparent calc(76.32% + 1px)),repeating-linear-gradient(to right,#e7ece9 0px,#e7ece9 1px,transparent 1px,transparent calc(100% / 12))}
+.projection-mode .signal-label strong{font-size:20px}.projection-mode .signal-label>span{font-size:8px}
+.projection-mode .level-high{top:calc(23.68% - 5px)}.projection-mode .level-low{top:calc(76.32% - 5px)}
+.projection-mode .legend{font-size:10px;margin:16px 0}
+.projection-mode .check-area{margin:0 -24px;padding:17px 24px;min-height:88px;flex-direction:row;flex-wrap:nowrap;align-items:center;gap:16px}
+.projection-mode .answer-actions{width:auto;margin-left:auto;gap:10px}
+.projection-mode .button{font-size:13px;padding:12px 15px}
+.projection-mode #feedback strong{font-size:13px}.projection-mode #feedback span{font-size:11px;margin-top:5px}
+.projection-mode footer{font-size:10px;padding:16px 0;flex-shrink:0}
+.projection-mode .catalog-intro{padding:34px 0 28px}
+.projection-mode .demo-catalog{flex:1;min-height:0;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:20px}
+.projection-mode .demo-card{padding:25px}.projection-mode .card-heading{margin-bottom:15px}
+.projection-mode .card-symbol{width:46px;height:46px;font-size:23px}
+.projection-mode .demo-card h2{font-size:25px}.projection-mode .demo-card p{font-size:13px;line-height:1.6;margin:12px 0 18px}
+.projection-mode .card-tags span{font-size:11px;padding:7px 10px}
+.projection-mode .card-link{margin-top:20px;padding-top:17px;font-size:13px}
+
+/* Más margen vertical en proyección, sin recortar los controles inferiores. */
+.projection-mode .projection-stage{height:840px}
+.projection-mode .topbar{height:48px;min-height:48px}
+.projection-mode .breadcrumb{padding-top:10px}
+.projection-mode .intro{padding:12px 0 15px}
+.projection-mode .intro .eyebrow{margin-bottom:7px}
+.projection-mode h1{font-size:32px}
+.projection-mode .lead{margin-top:7px;line-height:1.4}
+.projection-mode .circuit{height:94px}
+.projection-mode .chip{width:80px;height:80px;font-size:27px}
+.projection-mode .wire.r{top:20px}.projection-mode .wire.s{bottom:20px}
+.projection-mode .settings{min-height:0;padding:16px 20px}
+.projection-mode .settings>.eyebrow{margin-bottom:7px}
+.projection-mode .muted{margin:6px 0 11px}
+.projection-mode .variant{padding:9px 10px}
+.projection-mode .rule-title{margin:13px 0 8px}
+.projection-mode .settings td,.projection-mode .settings th{padding-top:6px;padding-bottom:6px}
+.projection-mode .settings table thead th{padding-top:7px;padding-bottom:7px}
+.projection-mode .note{font-size:10.5px;line-height:1.4;margin:9px 0}
+.projection-mode .initial{margin:10px 0 9px;padding:9px 11px;gap:5px}
+.projection-mode #initial-state{gap:6px}
+.projection-mode .workspace{padding-top:16px}
+.projection-mode .exercise-meta{margin:12px 0;padding-bottom:9px}
+.projection-mode .drawing-help{margin:9px 0 13px}
+.projection-mode .legend{margin:12px 0}
+.projection-mode .check-area{min-height:78px;padding-top:13px;padding-bottom:13px}
+.projection-mode footer{padding:12px 0}
