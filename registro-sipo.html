@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Registro SIPO interactivo de 4 bits con Enable y reset asíncrono.">
+  <title>Logic Lab · Registro SIPO de 4 bits</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="register-logic.js"></script><script defer src="register-app.js"></script>
+  <script defer src="projection.js"></script>
+</head>
+<body data-demo="register-sipo">
+  <header class="topbar"><a class="brand" href="index.html"><span class="brand-icon">⌁</span> logic<span>lab</span></a><span class="top-label">LABORATORIO DE ELECTRÓNICA DIGITAL</span><nav class="demo-nav" aria-label="Laboratorios"><a href="index.html">Índice</a><a href="index.html#registros">Registros</a></nav><span class="badge">REGISTRO 04</span></header>
+  <main>
+    <div class="breadcrumb">Registros <span>/</span> Serie · Paralelo</div>
+    <section class="intro"><div><p class="eyebrow">CAMBIA · CAPTURA · OBSERVA</p><h1>Un bit en cada pulso.<br><span>Cuatro salidas para leerlos.</span></h1><p class="lead">Elige el bit de entrada y observa cómo avanza<br class="desktop"> por las cuatro etapas, visibles en paralelo.</p></div><div class="register-emblem" aria-hidden="true">4<span>BITS · SIPO</span></div></section>
+    <div class="lab-layout">
+      <aside class="panel settings"><p class="eyebrow">01 / FUNCIONAMIENTO</p><h2>Registro SIPO · 4 bits</h2><p class="muted">Entrada serie y salida paralela.</p>
+        <div class="register-spec"><span>RELOJ</span><strong>Flanco ascendente ↑</strong><span>ENABLE</span><strong>Activo a 1</strong><span>RESET</span><strong>Asíncrono · activo a 1</strong></div>
+        <div class="rule-title">TABLA DE FUNCIONAMIENTO</div>
+        <table class="register-table"><thead><tr><th>RST</th><th>EN</th><th>CLK</th><th>Q siguiente</th></tr></thead><tbody><tr><td>1</td><td>–</td><td>–</td><td>0000</td></tr><tr><td>0</td><td>1</td><td>↑</td><td>Din Q3 Q2 Q1</td></tr><tr><td>0</td><td>0</td><td>↑</td><td>Q(t−1)</td></tr><tr><td>0</td><td>–</td><td>Sin ↑</td><td>Q(t−1)</td></tr></tbody></table>
+        <p class="note">Reset tiene prioridad y borra inmediatamente, sin esperar al reloj. Al desactivarlo, el registro conserva 0000 hasta una captura válida.</p>
+        <div class="initial"><span>Estado inicial</span><strong>Q = 0000 · CLK = 0</strong></div>
+        <p class="note">Recorrido: Din → Q3 → Q2 → Q1 → Q0. Introduce un bit en cada pulso. Tras cuatro capturas, el primero está en Q0 y el último en Q3. Las cuatro salidas se leen a la vez.</p>
+      </aside>
+      <section class="panel workspace register-workspace" aria-labelledby="register-title">
+        <div class="workspace-heading"><div><p class="eyebrow">02 / TU EXPERIMENTO</p><h2 id="register-title">Controla el registro</h2></div><button id="restart-register" class="button secondary">Reiniciar demo</button></div>
+        <div class="exercise-meta"><span><i class="dot"></i>Simulación interactiva</span><span>4 bits <span class="separator">/</span> Modelo ideal</span></div>
+        <div class="register-signals"><button id="enable-register" class="control-signal" aria-pressed="true"><span>ENABLE</span><strong>1</strong><small>Captura habilitada</small></button><button id="reset-register" class="control-signal" aria-pressed="false"><span>RESET ASÍNCRONO</span><strong>0</strong><small>Inactivo</small></button><button id="clock-register" class="control-signal" aria-pressed="false"><span>CLK · CAMBIAR NIVEL</span><strong>0</strong><small>Siguiente: flanco ↑</small></button><button id="pulse-register" class="button primary">Pulso de reloj ↑↓</button></div>
+        <div class="register-diagram"><div class="register-diagram-heading"><span>ENTRADA SERIE · Din</span><span>REGISTRO</span><span>SALIDAS PARALELAS · Q3–Q0</span></div><div id="register-bits"></div></div>
+        <div class="register-readout"><p>Pulsa Din para elegir 0 o 1. Observa las cuatro salidas paralelas después de cada pulso.</p></div>
+        <div id="register-feedback" class="register-feedback" role="status" aria-live="polite">Registro listo. Prepara las entradas y genera un flanco ascendente.</div>
+        <div class="register-history-heading"><span class="rule-title">ÚLTIMOS EVENTOS</span><span>Din / registro Q3 → Q0</span></div>
+        <div class="register-history-scroll"><table class="register-history"><thead><tr><th>Evento</th><th>CLK</th><th>EN</th><th>RST</th><th>Din</th><th>Registro</th></tr></thead><tbody id="register-history"></tbody></table></div>
+      </section>
+    </div>
+    <footer><span>logiclab <span class="footer-sep">/</span> Aprende siguiendo la señal.</span><span>REGISTROS · SIPO</span></footer>
+  </main>
+</body>
+</html>

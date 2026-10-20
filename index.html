@@ -25,7 +25,7 @@
     </section>
     <div class="category-tabs" role="group" aria-label="Categorías de laboratorios">
       <button id="category-biestables" class="category-button selected" aria-pressed="true" aria-controls="biestables">Biestables <span>5 demos</span></button>
-      <button id="category-registros" class="category-button" aria-pressed="false" aria-controls="registros">Registros <span>Próximamente</span></button>
+      <button id="category-registros" class="category-button" aria-pressed="false" aria-controls="registros">Registros <span>4 demos</span></button>
     </div>
     <section id="biestables" class="category-panel" aria-labelledby="category-biestables">
     <nav class="demo-catalog" aria-label="Demos de biestables">
@@ -55,12 +55,24 @@
     </nav>
     </section>
     <section id="registros" class="category-panel" aria-labelledby="category-registros" hidden>
-      <div class="registers-empty panel">
-        <span class="card-symbol" aria-hidden="true">▤</span>
-        <h2>Registros</h2>
-        <p>Aquí aparecerán las próximas demos de registros.</p>
-        <span class="badge">TODAVÍA NO HAY DEMOS</span>
-      </div>
+      <nav class="demo-catalog" aria-label="Demos de registros">
+        <a class="demo-card panel" href="registro-pipo.html">
+          <div class="card-heading"><span class="eyebrow">REGISTRO 01</span><span class="card-symbol">4 bit</span></div>
+          <h2>Registro PIPO · 4 bits</h2>
+          <p>Configura las entradas paralelas y captura los cuatro bits con Enable y reset asíncrono.</p>
+          <div class="card-tags"><span>Paralelo → Paralelo</span><span>Flanco ↑</span></div>
+          <span class="card-link">Abrir laboratorio <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="demo-card panel" href="registro-siso.html">
+          <div class="card-heading"><span class="eyebrow">REGISTRO 02</span><span class="card-symbol">→ 4</span></div>
+          <h2>Registro SISO · 4 bits</h2>
+          <p>Introduce un bit por pulso y sigue su desplazamiento hasta la salida serie.</p>
+          <div class="card-tags"><span>Serie → Serie</span><span>Flanco ↑</span></div>
+          <span class="card-link">Abrir laboratorio <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="demo-card panel" href="registro-piso.html"><div class="card-heading"><span class="eyebrow">REGISTRO 03</span><span class="card-symbol">4 →</span></div><h2>Registro PISO · 4 bits</h2><p>Carga cuatro bits en paralelo y desplázalos hacia una única salida serie.</p><div class="card-tags"><span>Paralelo → Serie</span><span>Flanco ↑</span></div><span class="card-link">Abrir laboratorio <span aria-hidden="true">→</span></span></a>
+        <a class="demo-card panel" href="registro-sipo.html"><div class="card-heading"><span class="eyebrow">REGISTRO 04</span><span class="card-symbol">→ 4</span></div><h2>Registro SIPO · 4 bits</h2><p>Introduce los bits en serie y observa las cuatro salidas en paralelo.</p><div class="card-tags"><span>Serie → Paralelo</span><span>Flanco ↑</span></div><span class="card-link">Abrir laboratorio <span aria-hidden="true">→</span></span></a>
+      </nav>
     </section>
 
     <footer><span>logiclab <span class="footer-sep">/</span> Aprende siguiendo la señal.</span><span>RS · D · JK · T</span></footer>

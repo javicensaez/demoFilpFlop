@@ -260,3 +260,101 @@ body.projection-mode{overflow:hidden}
 .projection-mode .demo-card p{margin:9px 0 12px;line-height:1.4}
 .projection-mode .card-link{margin-top:13px;padding-top:12px}
 @media(max-width:560px){.category-button{padding:10px 12px;gap:8px;font-size:12px}.category-button span{font-size:9px}}
+
+/* Registro PIPO interactivo. */
+.register-emblem{width:100px;height:100px;margin-right:55px;border:1px solid #a5bfae;background:#eaf1ec;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;font:500 42px 'Space Grotesk',sans-serif;color:var(--green)}
+.register-emblem span{font:600 9px 'DM Sans',sans-serif;letter-spacing:1px;margin-top:6px}
+.register-spec{display:grid;grid-template-columns:auto 1fr;gap:10px;padding:13px;background:#f0f6f2;border-radius:7px;margin:15px 0}
+.register-spec span{font-size:9px;letter-spacing:.8px;color:var(--muted)}.register-spec strong{font-size:11px;font-weight:500}
+.settings .register-table th,.settings .register-table td{border-left:0;padding-left:5px;padding-right:5px;font-family:inherit}
+.register-signals{display:flex;gap:10px;align-items:stretch;margin-bottom:15px}
+.control-signal{flex:1;text-align:left;border:1px solid var(--line);background:#f9fbfa;border-radius:8px;padding:10px 12px;color:var(--ink)}
+.control-signal>span{display:block;font-size:9px;letter-spacing:.7px}.control-signal strong{display:block;font:600 23px 'Space Grotesk',sans-serif;margin:5px 0}.control-signal small{display:block;font-size:10px;color:var(--muted)}
+.control-signal[aria-pressed="true"]{background:#edf6ef;border-color:#78a58f;color:var(--green)}
+#reset-register[aria-pressed="true"]{background:#fff0ed;border-color:#cc725d;color:#a83e29}
+.register-diagram{border:1px solid var(--line);border-radius:10px;padding:12px 18px;background:#fafcfb}
+.register-diagram-heading{display:flex;justify-content:space-between;font-size:9px;letter-spacing:.8px;color:var(--muted);margin-bottom:10px}
+.register-bit-row{display:grid;grid-template-columns:28px 40px 1fr 80px 1fr 40px 28px;align-items:center;min-height:42px;gap:6px}
+.bit-name{font:500 12px 'Space Grotesk',sans-serif}.bit-switch,.bit-output{border:1px solid #c6d5cd;border-radius:6px;background:white;display:grid;place-items:center;height:32px;font:600 18px 'Space Grotesk',sans-serif;color:#81928a}
+.bit-switch.on{background:#e0eee5;color:var(--green);border-color:#6ba185}.bit-output.on{background:#e9efff;color:var(--blue);border-color:#9ab4ef}
+.bit-wire{height:2px;background:#c8d7cf}.bit-wire.on{background:var(--blue)}
+.register-cell{text-align:center;border:1px solid #9bb8a7;background:#eaf1ec;border-radius:4px;font:500 17px 'Space Grotesk',sans-serif;padding:3px}
+.register-cell>span{display:block;font:8px 'DM Sans',sans-serif;color:var(--muted);margin-top:2px}
+.register-readout{display:flex;gap:25px;align-items:center;margin:13px 0}
+.register-readout>span{display:grid;grid-template-columns:auto auto;gap:4px 10px;font-size:10px;color:var(--muted)}
+.register-readout strong{font:600 17px monospace;letter-spacing:3px;color:var(--ink)}.register-readout small{grid-column:2;font-size:9px}
+.register-readout p{margin:0 0 0 auto;color:var(--muted);font-size:10px}
+.register-feedback{padding:12px 14px;background:#edf5ef;color:var(--green);border-radius:7px;font-size:12px;line-height:1.5}
+.register-history-heading{display:flex;align-items:center;justify-content:space-between;margin:15px 0 6px}
+.register-history-heading .rule-title{margin:0}.register-history-heading>span:last-child{font-size:9px;color:var(--muted)}
+.register-history-scroll{overflow:auto;max-height:155px;margin-bottom:16px;min-height:60px}
+.register-history{width:100%;font-size:10px}.register-history th,.register-history td{padding:6px 8px}.register-history td:nth-last-child(-n+2){font-family:monospace;letter-spacing:2px}
+.projection-mode .register-workspace .register-signals{margin-bottom:12px}
+.projection-mode .register-workspace .register-diagram{flex:1;min-height:180px;display:flex;flex-direction:column;padding:12px 18px}
+.projection-mode #register-bits{flex:1;display:flex;flex-direction:column;justify-content:space-around}
+.projection-mode .register-readout{margin:10px 0}.projection-mode .register-history-scroll{height:120px;min-height:120px;max-height:120px;margin-bottom:12px}
+.projection-mode .register-history-heading{margin:12px 0 6px}
+@media(max-width:760px){.register-emblem{display:none}.register-signals{flex-wrap:wrap}.control-signal{min-width:28%}.register-signals .primary{width:100%;justify-content:center}.register-bit-row{grid-template-columns:22px 32px 1fr 55px 1fr 32px 22px;gap:3px}.register-diagram{padding:10px}.register-diagram-heading{font-size:7px}.register-readout{flex-wrap:wrap}.register-readout p{width:100%;margin:0}.register-feedback{font-size:11px}.register-workspace{padding-bottom:10px}.register-spec{grid-column:1/-1}.register-workspace .register-history-scroll{max-height:160px}}
+
+/* Registro serie: una entrada y una salida; etapas visibles como estado interno. */
+.serial-chain{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:25px 0;min-width:540px}
+.serial-terminal,.serial-stage{display:flex;flex-direction:column;align-items:center;gap:10px}
+.serial-terminal>span{font-size:8px;color:var(--muted);letter-spacing:.6px;white-space:nowrap}
+.serial-terminal small,.serial-stage small{font-size:10px;color:var(--muted)}
+.serial-terminal .bit-switch,.serial-terminal .bit-output{width:42px;height:42px;font-size:23px}
+.serial-stage{background:#eaf1ec;border:1px solid #abc7b5;border-radius:8px;padding:13px 15px;min-width:70px}
+.serial-stage>span{font:600 13px 'Space Grotesk',sans-serif}.serial-stage .bit-output{width:40px;height:40px}
+.serial-arrow{font-size:22px;color:#7d9a88}
+body[data-demo="register-siso"] .register-diagram{overflow-x:auto}
+body.projection-mode[data-demo="register-siso"] #register-bits{justify-content:center}
+@media(max-width:760px){.serial-chain{gap:5px;padding:15px 0}.serial-stage{padding:10px;min-width:60px}}
+
+/* PISO: carga vertical de cada etapa y desplazamiento horizontal hacia Q0. */
+.piso-chain{display:flex;align-items:flex-end;justify-content:space-between;gap:6px;padding:8px 0;min-width:560px}
+.piso-column{display:flex;flex-direction:column;align-items:center;gap:6px}.piso-column>span:first-child{font:600 12px 'Space Grotesk',sans-serif}
+.piso-column>.bit-switch{width:38px;height:32px}.piso-down{font-size:18px;color:var(--green)}
+.piso-column .serial-stage{padding:8px 12px;gap:5px;min-width:62px}
+.piso-arrow{font-size:22px;color:#7d9a88;margin-bottom:25px}
+.piso-out,.piso-fill{display:flex;flex-direction:column;align-items:center;gap:8px;margin-bottom:8px}
+.piso-out small,.piso-fill small{font-size:8px;color:var(--muted);white-space:nowrap}
+.piso-out .bit-output{width:40px;height:36px}.piso-fill strong{font:500 20px monospace;color:#7d9a88}
+body[data-demo="register-piso"] .register-diagram{overflow-x:auto}
+body.projection-mode[data-demo="register-piso"] #register-bits{justify-content:center}
+body[data-demo="register-piso"] .control-signal{padding:9px}.control-signal strong{white-space:nowrap}
+body[data-demo="register-piso"] #load-register strong{font-size:17px}
+body[data-demo="register-piso"] .register-signals .primary{padding:10px;gap:0}
+@media(max-width:1000px){body[data-demo="register-piso"] .register-signals{flex-wrap:wrap}}
+
+/* PISO: controles compactos y espacio suficiente para todas las etapas. */
+body[data-demo="register-piso"] .register-signals{gap:8px;align-items:center}
+body[data-demo="register-piso"] .control-signal{display:grid;grid-template-columns:1fr auto;align-items:center;gap:3px 8px;padding:7px 10px;min-height:52px}
+body[data-demo="register-piso"] .control-signal>span{font-size:8px;letter-spacing:.4px}
+body[data-demo="register-piso"] .control-signal strong{grid-column:2;grid-row:1/3;margin:0;font-size:20px}
+body[data-demo="register-piso"] #load-register strong{font-size:14px}
+body[data-demo="register-piso"] .control-signal small{font-size:9px}
+body[data-demo="register-piso"] .register-signals #pulse-register{height:52px;min-height:0;font-size:11px;padding:8px 12px}
+body.projection-mode[data-demo="register-piso"] .register-workspace .register-diagram{min-height:205px;padding-top:8px;padding-bottom:8px}
+body[data-demo="register-piso"] .register-diagram-heading{margin-bottom:5px}
+body[data-demo="register-piso"] .piso-chain{padding:3px 0}
+body[data-demo="register-piso"] .piso-column{gap:4px}
+body[data-demo="register-piso"] .piso-column>.bit-switch{height:28px}
+body[data-demo="register-piso"] .piso-down{font-size:15px;line-height:1}
+body[data-demo="register-piso"] .serial-stage{padding:6px 12px;gap:4px}
+body[data-demo="register-piso"] .serial-stage .bit-output{height:32px}
+body.projection-mode[data-demo="register-piso"] .register-history-scroll{height:95px;min-height:95px;max-height:95px}
+
+/* SIPO: entrada serie y cuatro salidas paralelas. */
+.sipo-chain{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;min-width:510px;padding:12px 0}
+.sipo-column{display:flex;flex-direction:column;align-items:center;gap:7px}
+.sipo-column>.bit-output{width:40px;height:34px}
+.sipo-column .serial-stage{min-width:72px;padding:12px 10px;gap:7px}
+.sipo-column .serial-stage>span:first-child{font-size:10px}.sipo-column .serial-stage>span:last-child{font-size:9px;font-weight:400;color:var(--muted)}
+.sipo-arrow{font-size:23px;color:#7d9a88;margin-top:19px}
+body[data-demo="register-sipo"] .register-diagram{overflow-x:auto}
+body.projection-mode[data-demo="register-sipo"] #register-bits{justify-content:center}
+body[data-demo^="register-"] .register-signals{gap:8px;align-items:center}
+body[data-demo="register-sipo"] .control-signal{display:grid;grid-template-columns:1fr auto;align-items:center;gap:3px 8px;padding:7px 10px;min-height:52px}
+body[data-demo="register-sipo"] .control-signal>span{font-size:8px}
+body[data-demo="register-sipo"] .control-signal strong{grid-column:2;grid-row:1/3;margin:0;font-size:20px}
+body[data-demo="register-sipo"] .control-signal small{font-size:9px}
+body[data-demo="register-sipo"] #pulse-register{height:52px;font-size:11px}

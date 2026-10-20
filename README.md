@@ -41,3 +41,21 @@ Las fuentes de Google son opcionales; si no hay conexión se usan las fuentes de
 ## Proyección
 
 En pantallas panorámicas se usa un lienzo común de 1600×900, escalado proporcionalmente al ancho y alto disponibles. El ajuste se recalcula al redimensionar o entrar en pantalla completa; no depende de una resolución física concreta. En pantallas más estrechas se mantiene la distribución adaptable con desplazamiento. `projection.js` gestiona este ajuste en el índice y todas las demos.
+
+## Registro PIPO de 4 bits
+
+`registro-pipo.html`, en la categoría Registros, permite cambiar D3–D0, Enable, reset asíncrono activo a 1 y CLK manualmente, o generar un pulso completo. Q captura los cuatro bits en el flanco ascendente con Enable = 1. Reset tiene prioridad, borra inmediatamente y mantiene Q = 0000 mientras está activo. Al liberarlo no captura hasta una nueva subida válida. La demo incluye lectura binaria, historial y reinicio.
+
+Verificación del registro: `node --test tests/register.test.cjs`.
+
+## Registro SISO de 4 bits
+
+`registro-siso.html`, en Registros: una entrada Din y una salida Dout = Q0. Cada flanco ascendente habilitado desplaza Din → Q3 → Q2 → Q1 → Q0. Las cuatro etapas se muestran para seguir el estado interno. Un bit introducido alcanza Q0 en la cuarta captura. Incluye Enable, reset asíncrono activo a 1, reloj manual, pulsos e historial.
+
+## Registro PISO de 4 bits
+
+`registro-piso.html`: LOAD = 1 carga D3–D0 en paralelo; LOAD = 0 desplaza hacia Q0, rellenando Q3 con cero. Ambas operaciones requieren flanco ascendente y Enable = 1. Reset asíncrono activo a 1 tiene prioridad. Dout = Q0: tras cargar, D0 es visible inmediatamente; los tres siguientes pulsos presentan D1, D2 y D3. El cuarto pulso de desplazamiento deja el registro a cero. Incluye modo de carga, historial y controles compartidos.
+
+## Registro SIPO de 4 bits
+
+`registro-sipo.html`: entrada serie Din y salidas paralelas Q3–Q0. Cada subida habilitada desplaza Din → Q3 → Q2 → Q1 → Q0. Tras cuatro capturas, el primer bit está en Q0 y el último en Q3. Enable conserva el contenido cuando vale 0; reset asíncrono activo a 1 borra todas las etapas. Controles compactos, historial y formato de proyección compartidos.
