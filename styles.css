@@ -149,3 +149,10 @@ body[data-demo="jk"] .wire.k{top:calc(50% - 8px)}
 .signal-cell.forbidden-output,
 .signal-cell.forbidden-output[data-value],
 .signal-cell.forbidden-output.correct{border-top:0}
+
+/* Estado inicial RS: separar las dos salidas para facilitar su lectura. */
+body:not([data-demo]) #initial-state{display:flex;gap:36px;align-items:center;flex-wrap:wrap}
+body:not([data-demo]) #initial-state span{font:inherit;color:inherit}
+
+/* Estado inicial RS en dos filas. */
+body:not([data-demo]) #initial-state{flex-direction:column;align-items:flex-start;gap:8px}

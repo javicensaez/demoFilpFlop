@@ -54,7 +54,10 @@
     answers = { q: Array(count).fill(null), nq: Array(count).fill(null) };
     checked = false;
     showingSolution = false;
-    $('#initial-state').textContent = isD ? `Q = ${exercise.initial}${isEdge ? " · CLK = 0" : ""}` : `Q = ${exercise.initial}  ·  Q̅ = ${1 - exercise.initial}`;
+    $('#initial-state').textContent = `Q = ${exercise.initial}${isEdge ? " · CLK = 0" : ""}`;
+    if (!isD) {
+      $('#initial-state').innerHTML = `<span>Q = ${exercise.initial}</span><span>Q̅ = ${1 - exercise.initial}</span>`;
+    }
     $('#r-heading').textContent = isD ? inputLabel : type === 'nand' ? 'R̅' : 'R';
     $('#s-heading').textContent = isD ? (isEdge ? 'CLK' : 'EN') : type === 'nand' ? 'S̅' : 'S';
     $('#truth-table').innerHTML = (TYPES[type].rows || []).map(([r, s, q, nq, action], i) => `<tr class="${!isD && action === 'Prohibida' ? 'forbidden' : ''}"><td>${r}</td><td>${s}</td><td>${q}</td>${isD ? '' : `<td>${nq}</td>`}<td>${action}</td></tr>`).join('');
