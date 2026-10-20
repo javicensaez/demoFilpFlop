@@ -239,3 +239,24 @@ body.projection-mode{overflow:hidden}
 .projection-mode .legend{margin:12px 0}
 .projection-mode .check-area{min-height:78px;padding-top:13px;padding-bottom:13px}
 .projection-mode footer{padding:12px 0}
+
+/* Categorías del índice. */
+.category-tabs{display:flex;gap:10px;margin:0 0 20px;flex-shrink:0}
+.category-button{display:flex;align-items:center;gap:14px;padding:12px 18px;border:1px solid var(--line);border-radius:8px;background:white;color:var(--muted);font-weight:600}
+.category-button span{font-size:10px;font-weight:400}
+.category-button.selected{background:#e6f0e9;border-color:#78a58f;color:var(--green)}
+.category-panel[hidden]{display:none!important}
+.registers-empty{padding:48px 24px;text-align:center}
+.registers-empty .card-symbol{margin:0 auto 20px}
+.registers-empty h2{margin:0 0 12px;font-size:28px}
+.registers-empty p{color:var(--muted);margin-bottom:26px}
+.projection-mode .catalog-intro{padding:20px 0}
+.projection-mode .category-panel{display:flex;flex-direction:column;flex:1;min-height:0}
+.projection-mode .category-tabs{margin-bottom:16px}
+.projection-mode .registers-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.projection-mode .registers-empty .card-symbol{margin:0 0 20px}
+.projection-mode .demo-card{padding:18px 22px}
+.projection-mode .card-heading{margin-bottom:10px}
+.projection-mode .demo-card p{margin:9px 0 12px;line-height:1.4}
+.projection-mode .card-link{margin-top:13px;padding-top:12px}
+@media(max-width:560px){.category-button{padding:10px 12px;gap:8px;font-size:12px}.category-button span{font-size:9px}}

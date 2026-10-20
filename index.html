@@ -3,10 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Laboratorios interactivos de biestables: elige una demo, dibuja sus salidas y comprueba tu respuesta.">
-  <title>Logic Lab · Laboratorios de biestables</title>
+  <meta name="description" content="Laboratorios interactivos de electrónica digital: elige una demo, dibuja sus salidas y comprueba tu respuesta.">
+  <title>Logic Lab · Laboratorios de electrónica digital</title>
   <link rel="stylesheet" href="styles.css">
   <script defer src="projection.js"></script>
+  <script defer src="catalog.js"></script>
 </head>
 <body class="catalog-page">
   <header class="topbar">
@@ -18,11 +19,16 @@
     <section class="intro catalog-intro">
       <div>
         <p class="eyebrow">EXPERIMENTA · DIBUJA · COMPRUEBA</p>
-        <h1>Explora los biestables.<br><span>Una señal a la vez.</span></h1>
+        <h1>Explora la electrónica digital.<br><span>Una señal a la vez.</span></h1>
         <p class="lead">Elige una demo, interpreta las entradas y dibuja las salidas.<br>Comprueba tu respuesta o consulta la solución.</p>
       </div>
     </section>
-    <nav class="demo-catalog" aria-label="Demos disponibles">
+    <div class="category-tabs" role="group" aria-label="Categorías de laboratorios">
+      <button id="category-biestables" class="category-button selected" aria-pressed="true" aria-controls="biestables">Biestables <span>5 demos</span></button>
+      <button id="category-registros" class="category-button" aria-pressed="false" aria-controls="registros">Registros <span>Próximamente</span></button>
+    </div>
+    <section id="biestables" class="category-panel" aria-labelledby="category-biestables">
+    <nav class="demo-catalog" aria-label="Demos de biestables">
       <a class="demo-card panel" href="rs.html">
         <div class="card-heading"><span class="eyebrow">DEMO 01</span><span class="card-symbol">RS</span></div>
         <h2>Biestable RS</h2>
@@ -47,6 +53,15 @@
 <a class="demo-card panel" href="jk.html"><div class="card-heading"><span class="eyebrow">DEMO 04</span><span class="card-symbol">JK</span></div><h2>JK por flanco</h2><p>Memoria, Set, Reset y conmutación: interpreta J y K en cada flanco activo.</p><div class="card-tags"><span>Ascendente</span><span>Descendente</span></div><span class="card-link">Abrir laboratorio <span aria-hidden="true">→</span></span></a>
 <a class="demo-card panel" href="t.html"><div class="card-heading"><span class="eyebrow">DEMO 05</span><span class="card-symbol">T</span></div><h2>T por flanco</h2><p>Conserva o invierte Q según el valor de T en el flanco activo del reloj.</p><div class="card-tags"><span>Ascendente</span><span>Descendente</span></div><span class="card-link">Abrir laboratorio <span aria-hidden="true">→</span></span></a>
     </nav>
+    </section>
+    <section id="registros" class="category-panel" aria-labelledby="category-registros" hidden>
+      <div class="registers-empty panel">
+        <span class="card-symbol" aria-hidden="true">▤</span>
+        <h2>Registros</h2>
+        <p>Aquí aparecerán las próximas demos de registros.</p>
+        <span class="badge">TODAVÍA NO HAY DEMOS</span>
+      </div>
+    </section>
 
     <footer><span>logiclab <span class="footer-sep">/</span> Aprende siguiendo la señal.</span><span>RS · D · JK · T</span></footer>
   </main>
