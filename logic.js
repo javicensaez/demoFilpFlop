@@ -10,7 +10,7 @@
     'd-high': { name: 'Nivel alto', active: 1, rows: [[0, 0, 'Q(t−1)', 'Q̅(t−1)', 'Memoria'], [0, 1, 0, 1, 'Q = D'], [1, 0, 'Q(t−1)', 'Q̅(t−1)', 'Memoria'], [1, 1, 1, 0, 'Q = D']] },
     'd-low': { name: 'Nivel bajo', active: 0, rows: [[0, 0, 0, 1, 'Q = D'], [0, 1, 'Q(t−1)', 'Q̅(t−1)', 'Memoria'], [1, 0, 1, 0, 'Q = D'], [1, 1, 'Q(t−1)', 'Q̅(t−1)', 'Memoria']] },
     nor: { name: 'NOR', active: 1, rows: [[0, 0, 'Q(t−1)', 'Q̅(t−1)', 'Memoria'], [0, 1, 1, 0, 'Set'], [1, 0, 0, 1, 'Reset'], [1, 1, 0, 0, 'Prohibida']] },
-    nand: { name: 'NAND', active: 0, rows: [[1, 1, 'Q(t−1)', 'Q̅(t−1)', 'Memoria'], [1, 0, 1, 0, 'Set'], [0, 1, 0, 1, 'Reset'], [0, 0, 1, 1, 'Prohibida']] }
+    nand: { name: 'NAND', active: 0, rows: [[0, 0, 1, 1, 'Prohibida'], [0, 1, 0, 1, 'Reset'], [1, 0, 1, 0, 'Set'], [1, 1, 'Q(t−1)', 'Q̅(t−1)', 'Memoria']] }
   };
   function solve(type, r, s, initial, k = []) {
     if (!TYPES[type]) throw new Error('Tipo desconocido');

@@ -57,7 +57,7 @@
     $('#initial-state').textContent = isD ? `Q = ${exercise.initial}${isEdge ? " · CLK = 0" : ""}` : `Q = ${exercise.initial}  ·  Q̅ = ${1 - exercise.initial}`;
     $('#r-heading').textContent = isD ? inputLabel : type === 'nand' ? 'R̅' : 'R';
     $('#s-heading').textContent = isD ? (isEdge ? 'CLK' : 'EN') : type === 'nand' ? 'S̅' : 'S';
-    $('#truth-table').innerHTML = (TYPES[type].rows || []).map(([r, s, q, nq, action], i) => `<tr class="${!isD && i === 3 ? 'forbidden' : ''}"><td>${r}</td><td>${s}</td><td>${q}</td>${isD ? '' : `<td>${nq}</td>`}<td>${action}</td></tr>`).join('');
+    $('#truth-table').innerHTML = (TYPES[type].rows || []).map(([r, s, q, nq, action], i) => `<tr class="${!isD && action === 'Prohibida' ? 'forbidden' : ''}"><td>${r}</td><td>${s}</td><td>${q}</td>${isD ? '' : `<td>${nq}</td>`}<td>${action}</td></tr>`).join('');
     $('#rule-note').textContent = type === 'nor' ? 'NOR: S = 1 activa Set; R = 1 activa Reset. Con ambas a 0, conserva Q. Q(t−1) y Q̅(t−1) indican los valores anteriores. En el estado prohibido, las salidas no son complementarias.' : 'NAND: S̅ = 0 activa Set; R̅ = 0 activa Reset. Con ambas a 1, conserva Q. Q(t−1) y Q̅(t−1) indican los valores anteriores. En el estado prohibido, las salidas no son complementarias.';
     $('#rule-note').textContent += ' Si se pasa de prohibida a memoria, ambas salidas son X hasta un Set o Reset.';
     if (isD) {
