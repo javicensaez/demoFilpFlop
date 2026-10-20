@@ -126,12 +126,18 @@
     $('#mark-x').setAttribute('aria-pressed', String(xMode));
     $('#mark-x').classList.toggle('selected', xMode);
   });
+  function drawAtPointer(cell, event) {
+    if (!cell) return;
+    const bounds = cell.getBoundingClientRect();
+    paint = xMode ? 'X' : event.clientY < bounds.top + bounds.height / 2 ? 1 : 0;
+    setCell(cell);
+  }
   $('#chart').addEventListener('pointerdown', event => {
     const cell = event.target.closest('.signal-cell');
-    if (cell && event.button === 0) { drawing = true; toggleCell(cell); }
+    if (cell && event.button === 0) { drawing = true; drawAtPointer(cell, event); }
   });
   $('#chart').addEventListener('pointermove', event => {
-    if (drawing) setCell(document.elementFromPoint(event.clientX, event.clientY)?.closest('.signal-cell'));
+    if (drawing) drawAtPointer(document.elementFromPoint(event.clientX, event.clientY)?.closest('.signal-cell'), event);
   });
   window.addEventListener('pointerup', () => { drawing = false; });
   window.addEventListener('pointercancel', () => { drawing = false; });

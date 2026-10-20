@@ -8,7 +8,7 @@ Abre `index.html` en un navegador y elige una demo. No necesita instalación ni 
 
 1. Elige NOR (entradas activas a 1) o NAND (activas a 0, indicadas R̅ y S̅).
 2. El estado inicial anterior a t = 0 es siempre Q = 0 (en RS, Q̅ = 1).
-3. Pulsa cada tramo de Q y Q̅: el primer clic pone 1 y los siguientes alternan entre 0 y 1. Arrastra para extender el valor del primer tramo. Con teclado: Tab para moverte y Espacio para alternar.
+3. Pulsa o arrastra en la parte alta de un tramo para poner 1, o en la parte baja para poner 0. Este comportamiento se aplica a RS, D, JK y T. Con teclado: Tab para moverte y Espacio para alternar.
 4. Pulsa Comprobar. Los errores se indican con fondo rojo y una ×; puedes corregirlos y volver a comprobar.
 5. Nuevo ejercicio genera otras entradas. Cambiar entre NOR y NAND conserva las señales R/S y el estado inicial, recalcula la solución y limpia las respuestas. Borrar conserva el ejercicio.
 
