@@ -139,3 +139,13 @@ body[data-demo="jk"] .wire.k{top:55px}.demo-nav{flex-shrink:0}
 @media(min-width:1000px) and (min-aspect-ratio:3/2) and (max-height:800px){.catalog-intro{padding:18px 0}.catalog-page .demo-card{padding:16px}.catalog-page .card-heading{margin-bottom:8px}.catalog-page .card-symbol{width:36px;height:36px;font-size:18px}.catalog-page .demo-card h2{font-size:20px}.catalog-page .demo-card p{font-size:11px;line-height:1.4;margin:8px 0 10px}.catalog-page .card-tags span{padding:5px 8px;font-size:10px}.catalog-page .card-link{margin-top:12px;padding-top:10px;font-size:11px}.demo-catalog{gap:14px}body[data-demo="jk"] .wire.k{top:36px}}
 
 body[data-demo="jk"] .wire.k{top:calc(50% - 8px)}
+
+/* Estado prohibido RS: salidas en rojo, independientemente de su corrección. */
+.signal-cell.forbidden-output,.signal-cell.forbidden-output[data-value],.signal-cell.forbidden-output.correct{background:#c3332d10;color:#c3332d;border-top:2px solid #c3332d}
+.signal-cell.forbidden-output:hover{background:#c3332d20}
+.signal-cell.forbidden-output.incorrect{background:#d34a3520}
+
+/* Sin línea superior en los tramos prohibidos de la solución. */
+.signal-cell.forbidden-output,
+.signal-cell.forbidden-output[data-value],
+.signal-cell.forbidden-output.correct{border-top:0}

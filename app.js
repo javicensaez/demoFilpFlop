@@ -12,22 +12,30 @@
   const total = count * outputKeys.length;
   const outputLabel = isD ? 'Q' : 'Q y Q̅';
   const answerValues = () => outputKeys.flatMap(key => answers[key]);
-  let type = isJK ? 'jk-rising' : isT ? 't-rising' : isEdge ? 'd-rising' : isD ? 'd-high' : 'nor', exercise, answers, paint = 1, drawing = false, checked = false, xMode = false;
-  function waveform(values, color) {
+  let type = isJK ? 'jk-rising' : isT ? 't-rising' : isEdge ? 'd-rising' : isD ? 'd-high' : 'nor', exercise, answers, paint = 1, drawing = false, checked = false, xMode = false, showingSolution = false;
+  function isForbidden(index) {
+    return !isD && exercise.r[index] === TYPES[type].active && exercise.s[index] === TYPES[type].active;
+  }
+  function waveform(values, color, output = false) {
     let path = '';
     values.forEach((value, i) => {
       if (value === null || value === 'X') return;
       const x = i * width / count, y = value ? 18 : 58;
       path += `${i && (values[i - 1] === 0 || values[i - 1] === 1) ? 'L' : 'M'}${x},${y} H${x + width / count} `;
     });
-    return `<svg viewBox="0 0 ${width} ${height}" preserveAspectRatio="none" aria-hidden="true"><path d="${path}" fill="none" stroke="${color}" stroke-width="2.5" vector-effect="non-scaling-stroke"/></svg>`;
+    const forbidden = output ? values.map((value, i) => {
+      if (!showingSolution || !isForbidden(i) || (value !== 0 && value !== 1)) return '';
+      const x = i * width / count, y = value ? 18 : 58;
+      return `<path d="M${x},${y} H${x + width / count}" fill="none" stroke="#c3332d" stroke-width="3" vector-effect="non-scaling-stroke"/>`;
+    }).join('') : '';
+    return `<svg viewBox="0 0 ${width} ${height}" preserveAspectRatio="none" aria-hidden="true"><path d="${path}" fill="none" stroke="${color}" stroke-width="2.5" vector-effect="non-scaling-stroke"/>${forbidden}</svg>`;
   }
   function renderChart() {
     const rows = [['r', isD ? inputLabel : type === 'nand' ? 'R̅' : 'R', exercise.r], ['s', isD ? (isEdge ? 'CLK' : 'EN') : type === 'nand' ? 'S̅' : 'S', exercise.s], ['q', 'Q', answers.q], ['nq', 'Q̅', answers.nq]].filter(([key]) => !isD || key !== 'nq');
     if (isJK) rows.splice(1, 0, ['k', 'K', exercise.k]);
     $('#chart').innerHTML = `<div class="axis-title">t (s)</div><div class="time-axis">${Array.from({length: count + 1}, (_, i) => `<span style="left:${i * 100 / count}%">${i}</span>`).join('')}</div>` + rows.map(([key, label, values]) => {
       const editable = key === 'q' || key === 'nq';
-      return `<div class="signal-label ${editable ? 'editable-label' : ''}"><strong>${label}</strong><span>${editable ? 'SALIDA' : 'ENTRADA'}</span></div><div class="signal-track ${editable ? 'editable-track' : ''}" data-track="${key}"><span class="level level-high">1</span><span class="level level-low">0</span>${waveform(values, editable ? '#3672ed' : '#324c48')}<div class="cells">${values.map((v, i) => editable ? `<button class="signal-cell ${checked ? (v === exercise[key][i] ? 'correct' : 'incorrect') : ''}" data-row="${key}" data-index="${i}" aria-label="${label}, de ${i} a ${i + 1} segundos: ${v === null ? 'sin completar' : v}" ${v !== null ? `data-value="${v}"` : ''}><span>${v === null ? '·' : v === 'X' ? 'X' : ''}</span></button>` : `<span title="${label}: ${v}, de ${i} a ${i + 1} segundos"></span>`).join('')}</div></div>`;
+      return `<div class="signal-label ${editable ? 'editable-label' : ''}"><strong>${label}</strong><span>${editable ? 'SALIDA' : 'ENTRADA'}</span></div><div class="signal-track ${editable ? 'editable-track' : ''}" data-track="${key}"><span class="level level-high">1</span><span class="level level-low">0</span>${waveform(values, editable ? '#3672ed' : '#324c48', editable)}<div class="cells">${values.map((v, i) => editable ? `<button class="signal-cell ${showingSolution && isForbidden(i) ? 'forbidden-output' : ''} ${checked ? (v === exercise[key][i] ? 'correct' : 'incorrect') : ''}" data-row="${key}" data-index="${i}" aria-label="${label}, de ${i} a ${i + 1} segundos: ${v === null ? 'sin completar' : v}${showingSolution && isForbidden(i) ? ', condición prohibida' : ''}" ${v !== null ? `data-value="${v}"` : ''}><span>${v === null ? '·' : v === 'X' ? 'X' : ''}</span></button>` : `<span title="${label}: ${v}, de ${i} a ${i + 1} segundos"></span>`).join('')}</div></div>`;
     }).join('');
     updateCompletion();
   }
@@ -45,6 +53,7 @@
       : { ...exercise, type, ...solve(type, exercise.r, exercise.s, exercise.initial, exercise.k) };
     answers = { q: Array(count).fill(null), nq: Array(count).fill(null) };
     checked = false;
+    showingSolution = false;
     $('#initial-state').textContent = isD ? `Q = ${exercise.initial}${isEdge ? " · CLK = 0" : ""}` : `Q = ${exercise.initial}  ·  Q̅ = ${1 - exercise.initial}`;
     $('#r-heading').textContent = isD ? inputLabel : type === 'nand' ? 'R̅' : 'R';
     $('#s-heading').textContent = isD ? (isEdge ? 'CLK' : 'EN') : type === 'nand' ? 'S̅' : 'S';
@@ -75,15 +84,24 @@
     const key = cell.dataset.row, i = Number(cell.dataset.index);
     if (answers[key][i] === value) return;
     answers[key][i] = value;
+    if (showingSolution) {
+      showingSolution = false;
+      document.querySelectorAll('.forbidden-output').forEach(c => c.classList.remove('forbidden-output'));
+      document.querySelectorAll('.editable-track').forEach(track => {
+        track.querySelector('svg').outerHTML = waveform(answers[track.dataset.track], '#3672ed', true);
+        track.querySelectorAll('.signal-cell').forEach(c => c.setAttribute('aria-label', c.getAttribute('aria-label').replace(', condición prohibida', '')));
+      });
+      feedback('Respuesta modificada', 'Pulsa Comprobar para revisar los cambios.');
+    }
     if (checked) {
       checked = false;
       feedback('Respuesta modificada', 'Pulsa Comprobar para revisar los cambios.');
       document.querySelectorAll('.signal-cell').forEach(c => c.classList.remove('correct', 'incorrect'));
     }
     const track = cell.closest('.signal-track');
-    track.querySelector('svg').outerHTML = waveform(answers[key], '#3672ed');
+    track.querySelector('svg').outerHTML = waveform(answers[key], '#3672ed', true);
     cell.querySelector('span').textContent = value === null ? '·' : value === 'X' ? 'X' : '';
-    cell.setAttribute('aria-label', `${key === 'q' ? 'Q' : 'Q̅'}, de ${i} a ${i + 1} segundos: ${value === null ? 'sin completar' : value}`);
+    cell.setAttribute('aria-label', `${key === 'q' ? 'Q' : 'Q̅'}, de ${i} a ${i + 1} segundos: ${value === null ? 'sin completar' : value}${showingSolution && isForbidden(i) ? ', condición prohibida' : ''}`);
     if (value === null) delete cell.dataset.value; else cell.dataset.value = value;
     updateCompletion();
   }
@@ -119,16 +137,19 @@
   $('#clear').addEventListener('click', () => {
     answers = { q: Array(count).fill(null), nq: Array(count).fill(null) };
     checked = false;
+    showingSolution = false;
     feedback('Salidas limpias', `Dibuja ${outputLabel} para este mismo ejercicio.`);
     renderChart();
   });
   $('#show-solution').addEventListener('click', () => {
+    showingSolution = true;
     answers = { q: [...exercise.q], nq: [...exercise.nq] };
     checked = false;
     renderChart();
     feedback('Solución del ejercicio', isD ? 'Se muestra Q correcta. Pulsa Borrar para intentarlo de nuevo.' : 'Se muestran Q y Q̅ correctas. X indica indeterminación. Pulsa Borrar para intentarlo de nuevo.');
   });
   $('#check').addEventListener('click', () => {
+    showingSolution = false;
     const pending = answerValues().filter(v => v === null).length;
     if (pending) { feedback('Faltan tramos por dibujar', `Completa los ${pending} tramos pendientes de ${outputLabel} antes de comprobar.`, 'warning'); return; }
     checked = true;
