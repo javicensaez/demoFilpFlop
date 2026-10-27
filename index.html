@@ -26,6 +26,7 @@
     <div class="category-tabs" role="group" aria-label="Categorías de laboratorios">
       <button id="category-biestables" class="category-button selected" aria-pressed="true" aria-controls="biestables">Biestables <span>5 demos</span></button>
       <button id="category-registros" class="category-button" aria-pressed="false" aria-controls="registros">Registros <span>4 demos</span></button>
+      <button id="category-contadores" class="category-button" aria-pressed="false" aria-controls="contadores">Contadores <span>1 demo</span></button>
       <button id="category-maquina" class="category-button" aria-pressed="false" aria-controls="maquina">Máquina sencilla <span>2 demos</span></button>
     </div>
     <section id="biestables" class="category-panel" aria-labelledby="category-biestables">
@@ -76,6 +77,17 @@
       </nav>
     </section>
 
+    <section id="contadores" class="category-panel" aria-labelledby="category-contadores" hidden>
+      <nav class="demo-catalog" aria-label="Demos de contadores">
+        <a class="demo-card panel" href="contador-jk.html">
+          <div class="card-heading"><span class="eyebrow">CONTADOR 01</span><span class="card-symbol">0–15</span></div>
+          <h2>Contador síncrono JK · 4 bits</h2>
+          <p>Controla el reloj común y observa cómo cuatro biestables JK cuentan de 0 a 15 con puertas AND.</p>
+          <div class="card-tags"><span>Flanco ↑</span><span>Reset activo a 0</span></div>
+          <span class="card-link">Abrir laboratorio <span aria-hidden="true">→</span></span>
+        </a>
+      </nav>
+    </section>
     <section id="maquina" class="category-panel" aria-labelledby="category-maquina" hidden>
       <nav class="demo-catalog" aria-label="Demos de máquina sencilla">
         <a class="demo-card panel" href="maquina-sencilla.html">

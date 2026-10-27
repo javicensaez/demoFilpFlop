@@ -79,3 +79,9 @@ Cada fila permite introducir código, fuente y destino (o un valor de 16 bits pa
 El programa «Acumulador con etiquetas» conserva la secuencia facilitada con `inici`, `bucle`, `fi` y los datos `zero`, `uno`, `n`, `i`, `acumulador`. Con base 100 coincide con los operandos originales 100–104; otras bases relocalizan los datos. Admite terminadores `;` y comentarios `#`, como `#Dades`.
 
 «Comparación por incremento» añade el programa con datos `zero`, `uno`, `a`, `b`, `i`, `resultat` y etiquetas de código `inici`, `bucle`, `trobat_a`, `trobat_b`, `fi`. Conserva los saltos a 8, 11, 1 y 13 y relocaliza los operandos de datos según la base aleatoria.
+
+## Contador síncrono JK de 4 bits
+
+`contador-jk.html`, en la categoría Contadores (antes de Máquina sencilla), reproduce un contador ascendente módulo 16 con reloj común por flanco ascendente y reset asíncrono activo a 0. Q0 es el bit de menor peso. Las excitaciones son J0=K0=1, J1=K1=Q0, J2=K2=Q0·Q1 y J3=K3=Q0·Q1·Q2. Todos los bits se calculan simultáneamente con el estado anterior.
+
+Incluye diagrama con niveles lógicos y dos AND de dos entradas en cascada (Q0·Q1 y su salida combinada con Q2), reloj manual, pulso completo, reloj automático, reset, lectura binaria/decimal/hexadecimal e historial. El nivel bajo del reloj conserva el estado; reset tiene prioridad y su liberación no cuenta sin una nueva subida. `counter-logic.js` contiene el motor independiente del DOM.

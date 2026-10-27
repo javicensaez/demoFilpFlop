@@ -241,7 +241,7 @@ body.projection-mode{overflow:hidden}
 .projection-mode footer{padding:12px 0}
 
 /* Categorías del índice. */
-.category-tabs{display:flex;gap:10px;margin:0 0 20px;flex-shrink:0}
+.category-tabs{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 20px;flex-shrink:0}
 .category-button{display:flex;align-items:center;gap:14px;padding:12px 18px;border:1px solid var(--line);border-radius:8px;background:white;color:var(--muted);font-weight:600}
 .category-button span{font-size:10px;font-weight:400}
 .category-button.selected{background:#e6f0e9;border-color:#78a58f;color:var(--green)}
