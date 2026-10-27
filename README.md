@@ -74,4 +74,8 @@ Verificación: `node --test tests/*.test.cjs`.
 
 `programas-maquina.html` incluye el programa de suma repetida con etiquetas `bucle` y `fi`, además de suma de 1 hasta n y comparación y copia. Cada ejercicio elige una base de datos entre 50 y 100 inclusive. Las instrucciones se ubican desde 0 y los datos desde la base, consecutivamente, una palabra por dirección.
 
-Cada fila permite introducir código, fuente y destino (o un valor de 16 bits para los datos), con vista binaria y hexadecimal. Comprobar marca cada fila; Ver solución completa la tabla; Nuevo ejercicio cambia la base. BEQ acepta cualquier fuente. `program-logic.js` resuelve etiquetas en dos pasadas, incluidas referencias hacia delante.
+Cada fila permite introducir código, fuente y destino (o un valor de 16 bits para los datos), con vista binaria y hexadecimal. Comprobar marca cada fila; Ver solución completa la tabla; Nuevo ejercicio elige un programa diferente y cambia la base. BEQ acepta cualquier fuente. `program-logic.js` resuelve etiquetas en dos pasadas, incluidas referencias hacia delante.
+
+El programa «Acumulador con etiquetas» conserva la secuencia facilitada con `inici`, `bucle`, `fi` y los datos `zero`, `uno`, `n`, `i`, `acumulador`. Con base 100 coincide con los operandos originales 100–104; otras bases relocalizan los datos. Admite terminadores `;` y comentarios `#`, como `#Dades`.
+
+«Comparación por incremento» añade el programa con datos `zero`, `uno`, `a`, `b`, `i`, `resultat` y etiquetas de código `inici`, `bucle`, `trobat_a`, `trobat_b`, `fi`. Conserva los saltos a 8, 11, 1 y 13 y relocaliza los operandos de datos según la base aleatoria.

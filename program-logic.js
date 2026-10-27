@@ -44,15 +44,56 @@ fin:    CMP zero, zero
 zero:   0
 a:      7
 b:      7
-resultado: 0`}
+resultado: 0`},
+    {name: 'Acumulador con etiquetas', source: `inici:  MOV zero, i;
+        MOV zero, acumulador;
+bucle:  ADD uno, i;
+        ADD i, acumulador;
+        CMP n, i;
+        BEQ fi;
+        CMP zero, zero;
+        BEQ bucle;
+fi:     BEQ fi;
+
+#Dades
+
+zero:       0;
+uno:         1;
+n:          4;
+i:          0;
+acumulador: 0;`},
+    {name: 'Comparación por incremento', source: `inici:  MOV zero, i;
+bucle:  ADD uno, i;
+        CMP a, i;
+        BEQ trobat_a;
+        CMP b, i;
+        BEQ trobat_b;
+        CMP zero, zero;
+        BEQ bucle;
+trobat_a: MOV zero, resultat;
+        CMP zero, zero;
+        BEQ fi;
+trobat_b: MOV uno, resultat;
+        CMP zero, zero;
+fi:     BEQ fi;
+
+#Dades
+
+zero:     0;
+uno:       1;
+a:        2;
+b:        1;
+i:        0;
+resultat: 0;`}
   ];
   function assemble(source, base) {
     if (!Number.isInteger(base) || base < 50 || base > 100) throw new Error('La base de datos debe estar entre 50 y 100.');
     const symbols = Object.create(null), rows = [];
     let code = 0, data = 0;
     for (const line of source.split('\n')) {
-      if (!line.trim()) continue;
-      const match = line.trim().match(/^(?:([a-zA-Z_]\w*):\s*)?(.+)$/);
+      const contentLine = line.split(/[;#]/, 1)[0].trim();
+      if (!contentLine) continue;
+      const match = contentLine.match(/^(?:([a-zA-Z_]\w*):\s*)?(.+)$/);
       if (!match) throw new Error('Línea no válida.');
       const [, label, content] = match;
       const isData = /^\d+$/.test(content);

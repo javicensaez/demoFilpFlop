@@ -71,9 +71,16 @@
       entry.inputs.forEach(input => { input.value = entry.row.bits.slice(offset, offset + input.maxLength); offset += input.maxLength; input.removeAttribute('aria-invalid'); });
       delete entry.tr.dataset.result; entry.status.textContent = 'Solución'; preview(entry);
     });
-    $('program-feedback').textContent = 'Solución mostrada. En BEQ se ha usado fuente 0000000; cualquier valor de ese campo es válido. Pulsa Nuevo ejercicio para practicar con otra base.';
+    $('program-feedback').textContent = 'Solución mostrada. En BEQ se ha usado fuente 0000000; cualquier valor de ese campo es válido. Pulsa Nuevo ejercicio para practicar con otro programa y otra base.';
   });
-  $('program-new').addEventListener('click', next);
+  $('program-new').addEventListener('click', () => {
+    if (examples.length > 1) {
+      const current = Number($('program-choice').value);
+      const offset = 1 + Math.floor(Math.random() * (examples.length - 1));
+      $('program-choice').value = String((current + offset) % examples.length);
+    }
+    next();
+  });
   $('program-choice').addEventListener('change', next);
   next();
 })();
