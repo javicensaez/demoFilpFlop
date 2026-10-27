@@ -91,3 +91,15 @@ Incluye diagrama con niveles lógicos y dos AND de dos entradas en cascada (Q0·
 `lfsr-4.html` añade una segunda demo en Contadores. Usa cuatro biestables D con reloj común ascendente: Q3 siguiente = Q0 XOR Q1; Q2 siguiente = Q3; Q1 siguiente = Q2; Q0 siguiente = Q1. El diagrama conecta las derivaciones Q0 y Q1 a la XOR y devuelve su salida a D3, mostrando los niveles lógicos.
 
 Incluye reloj manual, pulsos, reloj automático, semilla configurable, lectura binaria/decimal/hexadecimal e historial. Empieza en 0001. INIT activo bajo inicializa asíncronamente a 0001 mediante preset de Q0 y clear de los demás bits. Una semilla no nula recorre 15 estados; 0000 queda bloqueado. Las pruebas verifican el período para las 15 semillas no nulas, los flancos, el bloqueo y la prioridad de inicialización.
+
+## Divisor de frecuencia con JK en cascada
+
+`divisor-frecuencia.html`, en Contadores, reproduce cuatro JK con J = K = 1 y flanco descendente. CLK acciona A, y cada salida acciona el reloj de la siguiente etapa: A = f/2, B = f/4, C = f/8 y D = f/16. DCBA cuenta de 0 a 15 y vuelve a cero. Incluye reloj manual, pulsos, reloj automático, niveles del circuito y cronograma de los últimos 64 cambios. Reiniciar vuelve a CLK = 0 y DCBA = 0000. El modelo muestra estados estabilizados sin retardos de propagación.
+
+Verificación: `node --test tests/*.test.cjs`.
+
+## RAM de 4 registros D
+
+`ram-4.html`, en Registros, simula una RAM de 4 palabras de 4 bits (16 bits en total). DIN llega a todas las entradas D. A1 A0 se conecta al decodificador 2→4 y al selector del multiplexador 4→1. WE habilita el decodificador: solo el registro seleccionado recibe Enable = 1 y captura DIN en el flanco ascendente del reloj común. WE = 0 impide escribir. Las cuatro salidas Q llegan al multiplexador; DOUT presenta la palabra de la dirección actual sin esperar al reloj.
+
+Incluye edición de bits de datos y dirección, WE, reloj manual, pulso completo, diagrama con buses y enables, tabla de memoria e historial. Cambiar datos, dirección o WE sin una subida no modifica la memoria. Reiniciar pone palabras y controles a cero. Modelo ideal sin retardos. Motor independiente en `ram-logic.js`; pruebas en `tests/ram.test.cjs`.

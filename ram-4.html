@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="RAM de cuatro registros D de cuatro bits con decodificador de escritura y multiplexador de lectura.">
+<title>RAM 4 × 4 · Logic Lab</title>
+<link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="counter.css"><link rel="stylesheet" href="ram.css">
+<script defer src="ram-logic.js"></script><script defer src="ram-app.js"></script>
+</head>
+<body class="counter-page">
+<header class="topbar"><a class="brand" href="index.html"><span class="brand-icon">⌁</span> logic<span>lab</span></a><span class="top-label">LABORATORIO DE ELECTRÓNICA DIGITAL</span><span class="badge">REGISTROS · RAM</span></header>
+<main>
+<nav class="breadcrumb" aria-label="Ruta"><a href="index.html#registros">Registros</a><span>/</span>Memoria RAM</nav>
+<section class="intro"><div><p class="eyebrow">DIRECCIONA · ESCRIBE · LEE</p><h1>RAM de 4 registros D</h1><p class="lead">Un bus de 4 bits llega a todos los registros. La dirección selecciona dónde escribir y qué palabra leer.</p></div></section>
+<section class="panel counter-panel">
+<div class="workspace-heading"><h2>Controla la memoria · 4 × 4 bits</h2><button id="ram-restart" class="button secondary">Reiniciar demo</button></div>
+<div class="counter-controls">
+<div class="ram-input"><span>BUS DE DATOS · D3 D2 D1 D0</span><div id="ram-data" class="ram-bits"></div></div>
+<div class="ram-input"><span>BUS DE DIRECCIONES · A1 A0</span><div id="ram-address" class="ram-bits"></div></div>
+<button id="ram-we" class="control-signal" aria-pressed="false"><span>WE · ESCRITURA</span><strong>0</strong><small>Deshabilitada</small></button>
+<button id="ram-clock" class="control-signal" aria-pressed="false"><span>CLK · CAMBIAR NIVEL</span><strong>0</strong><small>Siguiente: flanco ↑</small></button>
+<button id="ram-pulse" class="button primary">Pulso de reloj ↑↓</button>
+<div class="counter-value"><span>SALIDA · DOUT</span><output id="ram-output">0000</output><span id="ram-output-number">Decimal 0 · Hex 0</span></div>
+</div>
+<div class="counter-diagram" id="ram-diagram"></div>
+<p class="counter-legend"><span class="signal-key high"></span>Control = 1 <span class="signal-key"></span>Control = 0 · Buses de 4 bits en azul, con su valor binario.</p>
+<p id="ram-feedback" role="status" aria-live="polite"></p>
+</section>
+<div class="counter-details">
+<section class="panel counter-panel"><h2>Contenido de la RAM</h2><table><thead><tr><th>Dirección</th><th>Registro</th><th>EN</th><th>Q3…Q0</th><th>Decimal</th></tr></thead><tbody id="ram-memory"></tbody></table><p class="note">La fila seleccionada es la que lee el multiplexador. WE = 1 habilita únicamente su registro; captura D en el próximo flanco ↑. Con WE = 0, todos conservan su contenido.</p></section>
+<section class="panel counter-panel"><h2>Últimos eventos</h2><table><thead><tr><th>Evento</th><th>Dir.</th><th>D</th><th>DOUT</th></tr></thead><tbody id="ram-history"></tbody></table><p class="note">Lectura combinacional: cambiar la dirección actualiza DOUT sin pulsar CLK, incluso con WE = 0. Cambiar D, WE o dirección con CLK alto no escribe. Reiniciar borra los cuatro registros y los controles. Modelo ideal sin retardos.</p></section>
+</div>
+<footer><span>logiclab / Registros</span><span>RAM · DECODIFICADOR 2→4 · MUX 4→1</span></footer>
+</main></body></html>

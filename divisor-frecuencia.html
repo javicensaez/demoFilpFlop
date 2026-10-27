@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Divisor de frecuencia con cuatro biestables JK en cascada.">
+<title>Divisor de frecuencia · Logic Lab</title>
+<link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="counter.css">
+<script defer src="divider-logic.js"></script><script defer src="divider-app.js"></script>
+</head>
+<body class="counter-page">
+<header class="topbar"><a class="brand" href="index.html"><span class="brand-icon">⌁</span> logic<span>lab</span></a><span class="top-label">LABORATORIO DE ELECTRÓNICA DIGITAL</span><span class="badge">CONTADORES · DIVISOR</span></header>
+<main>
+<nav class="breadcrumb" aria-label="Ruta"><a href="index.html#contadores">Contadores</a><span>/</span>Divisor de frecuencia</nav>
+<section class="intro"><div><p class="eyebrow">PULSA · DIVIDE · OBSERVA</p><h1>Divisor de frecuencia con JK</h1><p class="lead">Cuatro biestables en cascada: cada salida conecta con el reloj de la siguiente etapa y divide su frecuencia entre dos.</p></div></section>
+<section class="panel counter-panel">
+<div class="workspace-heading"><h2>Controla los pulsos de entrada</h2><button id="divider-restart" class="button secondary">Reiniciar demo</button></div>
+<div class="counter-controls">
+<button id="divider-clock" class="control-signal" aria-pressed="false"><span>CLK · CAMBIAR NIVEL</span><strong>0</strong><small>Siguiente: flanco ↑</small></button>
+<button id="divider-pulse" class="button primary">Pulso de reloj ↑↓</button>
+<button id="divider-auto" class="button secondary" aria-pressed="false">Iniciar reloj automático</button>
+<div class="counter-value"><span>D C B A · A es el bit de menor peso</span><output id="divider-binary">0000</output><span>Decimal <output id="divider-decimal">0</output></span></div>
+</div>
+<div class="counter-diagram" id="divider-diagram"></div>
+<p class="counter-legend"><span class="signal-key high"></span>1 lógico <span class="signal-key"></span>0 lógico · Burbuja en CK: flanco descendente · J = K = 1 en todas las etapas.</p>
+<p id="divider-feedback" role="status" aria-live="polite"></p>
+</section>
+<div class="counter-details">
+<section class="panel counter-panel"><h2>Frecuencias de salida</h2><table><thead><tr><th>Salida</th><th>Reloj de etapa</th><th>Frecuencia</th><th>Período</th></tr></thead><tbody>
+<tr><td>A</td><td>CLK ↓</td><td>f / 2</td><td>2T</td></tr><tr><td>B</td><td>A ↓</td><td>f / 4</td><td>4T</td></tr><tr><td>C</td><td>B ↓</td><td>f / 8</td><td>8T</td></tr><tr><td>D</td><td>C ↓</td><td>f / 16</td><td>16T</td></tr>
+</tbody></table><p class="note">f y T son la frecuencia y el período de entrada. Contador asíncrono ascendente módulo 16: 0000 → 0001 → … → 1111 → 0000. Cada caída se propaga por la cascada. Modelo ideal sin retardos; se muestra el estado estabilizado. Reiniciar establece todas las salidas a cero.</p></section>
+<section class="panel counter-panel"><h2>Cronograma de CLK y salidas</h2><p class="note">Últimos 64 cambios de nivel. Cada columna representa medio período del reloj automático.</p><div class="counter-diagram" id="divider-timing"></div></section>
+</div>
+<footer><span>logiclab / Contadores</span><span>ASÍNCRONO · JK · ÷2 · ÷4 · ÷8 · ÷16</span></footer>
+</main></body></html>
