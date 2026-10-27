@@ -26,6 +26,7 @@
     <div class="category-tabs" role="group" aria-label="Categorías de laboratorios">
       <button id="category-biestables" class="category-button selected" aria-pressed="true" aria-controls="biestables">Biestables <span>5 demos</span></button>
       <button id="category-registros" class="category-button" aria-pressed="false" aria-controls="registros">Registros <span>4 demos</span></button>
+      <button id="category-maquina" class="category-button" aria-pressed="false" aria-controls="maquina">Máquina sencilla <span>2 demos</span></button>
     </div>
     <section id="biestables" class="category-panel" aria-labelledby="category-biestables">
     <nav class="demo-catalog" aria-label="Demos de biestables">
@@ -75,6 +76,24 @@
       </nav>
     </section>
 
+    <section id="maquina" class="category-panel" aria-labelledby="category-maquina" hidden>
+      <nav class="demo-catalog" aria-label="Demos de máquina sencilla">
+        <a class="demo-card panel" href="maquina-sencilla.html">
+          <div class="card-heading"><span class="eyebrow">CPU · 16 BITS</span><span class="card-symbol">01</span></div>
+          <h2>Máquina sencilla</h2>
+          <p>Traduce instrucciones entre ensamblador y código máquina con ADD, CMP, MOV y BEQ.</p>
+          <div class="card-tags"><span>Ensamblador → Binario</span><span>Binario → Ensamblador</span></div>
+          <span class="card-link">Abrir juego <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="demo-card panel" href="programas-maquina.html">
+          <div class="card-heading"><span class="eyebrow">CPU · PROGRAMAS</span><span class="card-symbol">02</span></div>
+          <h2>Codifica programas</h2>
+          <p>Resuelve etiquetas y variables y traduce un programa completo con una base de datos aleatoria.</p>
+          <div class="card-tags"><span>Etiquetas y saltos</span><span>Datos desde 50–100</span></div>
+          <span class="card-link">Abrir juego <span aria-hidden="true">→</span></span>
+        </a>
+      </nav>
+    </section>
     <footer><span>logiclab <span class="footer-sep">/</span> Aprende siguiendo la señal.</span><span>RS · D · JK · T</span></footer>
   </main>
 </body>

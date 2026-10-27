@@ -1,7 +1,7 @@
 (() => {
   const buttons = document.querySelectorAll('.category-button');
   const selectedCategory = location.hash.slice(1);
-  if (selectedCategory === 'registros') {
+  if ([...buttons].some(button => button.getAttribute('aria-controls') === selectedCategory)) {
     buttons.forEach(button => {
       const selected = button.getAttribute('aria-controls') === selectedCategory;
       button.classList.toggle('selected', selected);

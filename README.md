@@ -59,3 +59,19 @@ Verificación del registro: `node --test tests/register.test.cjs`.
 ## Registro SIPO de 4 bits
 
 `registro-sipo.html`: entrada serie Din y salidas paralelas Q3–Q0. Cada subida habilitada desplaza Din → Q3 → Q2 → Q1 → Q0. Tras cuatro capturas, el primer bit está en Q0 y el último en Q3. Enable conserva el contenido cuando vale 0; reset asíncrono activo a 1 borra todas las etapas. Controles compactos, historial y formato de proyección compartidos.
+
+## Máquina sencilla
+
+`maquina-sencilla.html`, accesible desde la nueva categoría del índice, ofrece ejercicios aleatorios de ensamblador a binario y de binario a ensamblador, comprobación, solución y contador de aciertos en el primer intento válido (consultar la solución cuenta como no acertado).
+
+Cada instrucción tiene 16 bits: código (2), dirección fuente (7) y dirección destino (7). Las direcciones se escriben en decimal, de 0 a 127. Códigos: `00 ADD`, `01 CMP`, `10 MOV`, `11 BEQ`. ADD suma ambos contenidos en destino; CMP compara sin modificar memoria; MOV copia fuente a destino. Estas tres instrucciones actualizan Z según resultado cero, igualdad o valor copiado cero, respectivamente. BEQ salta a destino si Z = 1 y continúa si Z = 0.
+
+BEQ se escribe `BEQ destino`: al generar su código se usa fuente cero, pero al comprobar y decodificar se acepta cualquier campo fuente. Los ejercicios de decodificación también incluyen fuentes no nulas para BEQ. El juego practica la codificación; no ejecuta programas.
+
+Verificación: `node --test tests/*.test.cjs`.
+
+## Codifica programas
+
+`programas-maquina.html` incluye el programa de suma repetida con etiquetas `bucle` y `fi`, además de suma de 1 hasta n y comparación y copia. Cada ejercicio elige una base de datos entre 50 y 100 inclusive. Las instrucciones se ubican desde 0 y los datos desde la base, consecutivamente, una palabra por dirección.
+
+Cada fila permite introducir código, fuente y destino (o un valor de 16 bits para los datos), con vista binaria y hexadecimal. Comprobar marca cada fila; Ver solución completa la tabla; Nuevo ejercicio cambia la base. BEQ acepta cualquier fuente. `program-logic.js` resuelve etiquetas en dos pasadas, incluidas referencias hacia delante.

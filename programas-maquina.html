@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codifica programas · Logic Lab</title>
+  <link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="program.css">
+  <script defer src="machine-logic.js"></script><script defer src="program-logic.js"></script><script defer src="program-app.js"></script>
+</head>
+<body class="program-page">
+  <header class="topbar"><a class="brand" href="index.html"><span class="brand-icon">⌁</span> logic<span>lab</span></a><span class="badge">MÁQUINA SENCILLA · PROGRAMAS</span></header>
+  <main>
+    <nav class="breadcrumb" aria-label="Ruta"><a href="index.html#maquina">Laboratorios</a><span>/</span>Codifica programas</nav>
+    <section class="intro"><div><p class="eyebrow">ETIQUETAS · DIRECCIONES · CÓDIGO MÁQUINA</p><h1>Codifica el programa</h1><p class="lead">Resuelve las etiquetas y traduce cada instrucción y cada dato a una palabra de 16 bits.</p></div></section>
+    <div class="program-layout">
+      <aside class="panel program-source"><label for="program-choice">Programa</label><select id="program-choice"></select>
+        <p class="base-note">Base de datos: <strong id="data-base"></strong></p>
+        <pre id="program-source" aria-label="Programa en ensamblador"></pre>
+        <p class="note">Las instrucciones empiezan en 0 y ocupan una dirección cada una. Los datos se sitúan consecutivamente desde la base indicada. Las etiquetas de salto apuntan a instrucciones; los operandos de datos apuntan a variables.</p>
+        <p class="note">00 ADD · 01 CMP · 10 MOV · 11 BEQ<br>Formato: código (2) | fuente (7) | destino (7). En BEQ se ignora fuente. Los datos se codifican como valores de 16 bits, sin código de operación.</p>
+      </aside>
+      <section class="panel program-workspace" aria-labelledby="coding-title">
+        <h2 id="coding-title">Tu código máquina</h2><p class="note" id="coding-help">Completa los campos binarios. La palabra completa y el hexadecimal se actualizan al escribir.</p>
+        <form id="program-form" novalidate>
+          <div class="program-table-scroll"><table class="program-table"><thead><tr><th scope="col">Dir.</th><th scope="col">Ensamblador</th><th scope="col">Código / dato</th><th scope="col">Fuente</th><th scope="col">Destino</th><th scope="col">16 bits</th><th scope="col">Hex.</th><th scope="col">Estado</th></tr></thead><tbody id="program-rows"></tbody></table></div>
+          <div class="program-actions"><button class="button primary" type="submit">Comprobar</button><button class="button secondary" type="button" id="program-solution">Ver solución</button><button class="button secondary" type="button" id="program-new">Nuevo ejercicio</button></div>
+        </form>
+        <p id="program-feedback" role="status" aria-live="polite"></p>
+      </section>
+    </div>
+    <footer><span>logiclab / Máquina sencilla</span><a href="maquina-sencilla.html">Practicar instrucciones sueltas →</a></footer>
+  </main>
+</body>
+</html>

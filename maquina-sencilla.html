@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Máquina sencilla · Logic Lab</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="machine.css">
+  <script defer src="projection.js"></script>
+  <script defer src="machine-logic.js"></script>
+  <script defer src="machine-app.js"></script>
+</head>
+<body class="machine-page">
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="brand-icon">⌁</span> logic<span>lab</span></a>
+    <span class="top-label">LABORATORIO DE ELECTRÓNICA DIGITAL</span><span class="badge">CPU · 16 BITS</span>
+  </header>
+  <main>
+    <nav class="breadcrumb" aria-label="Ruta"><a href="index.html#maquina">Laboratorios</a><span>/</span>Máquina sencilla</nav>
+    <section class="intro"><div><p class="eyebrow">LEE · TRADUCE · COMPRUEBA</p><h1>Máquina sencilla</h1><p class="lead">Practica la traducción entre ensamblador y código máquina. Direcciones en decimal, de 0 a 127.</p></div></section>
+    <div class="lab-layout">
+      <aside class="panel settings">
+        <p class="eyebrow">REFERENCIA</p><h2>Cuatro instrucciones</h2>
+        <table><thead><tr><th>Bits</th><th>Operación</th></tr></thead><tbody>
+          <tr><td>00</td><td>ADD fuente, destino</td></tr><tr><td>01</td><td>CMP fuente, destino</td></tr><tr><td>10</td><td>MOV fuente, destino</td></tr><tr><td>11</td><td>BEQ destino</td></tr>
+        </tbody></table>
+        <p class="note"><strong>ADD:</strong> suma ambos contenidos y guarda el resultado en destino. Z = 1 si el resultado es cero; si no, Z = 0.</p>
+        <p class="note"><strong>CMP:</strong> compara los contenidos sin modificar la memoria. Z = 1 si son iguales; si no, Z = 0.</p>
+        <p class="note"><strong>MOV:</strong> copia el contenido de fuente en destino. Z = 1 si copia cero; si no, Z = 0.</p>
+        <p class="note"><strong>BEQ:</strong> con Z = 1 salta a destino; con Z = 0 continúa con la siguiente instrucción. El campo fuente se ignora.</p>
+      </aside>
+      <section class="panel machine-workspace" aria-labelledby="game-title">
+        <div class="workspace-heading"><h2 id="game-title">Traduce la instrucción</h2><span id="score" class="badge">0 / 0 aciertos</span></div>
+        <div class="machine-modes" role="group" aria-label="Modo de juego">
+          <button class="variant active" data-mode="encode" aria-pressed="true">Ensamblador → Máquina</button>
+          <button class="variant" data-mode="decode" aria-pressed="false">Máquina → Ensamblador</button>
+        </div>
+        <div class="bit-format" aria-label="Formato de instrucción"><span>Código <strong>2 bits</strong><small>15–14</small></span><span>Fuente <strong>7 bits</strong><small>13–7</small></span><span>Destino <strong>7 bits</strong><small>6–0</small></span></div>
+        <p class="eyebrow" id="prompt-label">ENSAMBLADOR</p><div id="instruction" class="machine-instruction"></div>
+        <form id="answer-form" novalidate>
+          <div id="binary-answer" class="binary-answer">
+            <div><label for="opcode-answer">Código · 2 bits</label><input id="opcode-answer" maxlength="2" inputmode="numeric" pattern="[01]{2}" autocomplete="off" spellcheck="false" aria-describedby="answer-help"></div>
+            <div><label for="source-answer">Fuente · 7 bits</label><input id="source-answer" maxlength="7" inputmode="numeric" pattern="[01]{7}" autocomplete="off" spellcheck="false" aria-describedby="answer-help"></div>
+            <div><label for="destination-answer">Destino · 7 bits</label><input id="destination-answer" maxlength="7" inputmode="numeric" pattern="[01]{7}" autocomplete="off" spellcheck="false" aria-describedby="answer-help"></div>
+            <div class="binary-preview"><span>16 bits</span><output id="binary-preview" for="opcode-answer source-answer destination-answer">················</output></div>
+            <div class="binary-preview"><span>Hexadecimal</span><output id="hex-preview" for="opcode-answer source-answer destination-answer">—</output></div>
+          </div>
+          <div id="assembly-answer" hidden>
+          <label id="answer-label" for="answer">Tu respuesta en código máquina</label>
+          <input id="answer" type="text" autocomplete="off" spellcheck="false" aria-describedby="answer-help" required>
+          </div>
+          <p class="note" id="answer-help"></p>
+          <div class="machine-actions"><button class="button primary" type="submit">Comprobar</button><button class="button secondary" id="solution" type="button">Ver solución</button><button class="button secondary" id="next" type="button">Nuevo ejercicio</button></div>
+        </form>
+        <div id="machine-feedback" role="status" aria-live="polite"></div>
+      </section>
+    </div>
+    <footer><span>logiclab / Máquina sencilla</span><span>ADD · CMP · MOV · BEQ</span></footer>
+  </main>
+</body>
+</html>
