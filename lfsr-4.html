@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="LFSR interactivo de 4 bits con realimentación XOR, semilla configurable y reloj común.">
+  <title>LFSR de 4 bits · Logic Lab</title>
+  <link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="counter.css">
+  <script defer src="lfsr-logic.js"></script><script defer src="lfsr-app.js"></script>
+</head>
+<body class="counter-page">
+  <header class="topbar"><a class="brand" href="index.html"><span class="brand-icon">⌁</span> logic<span>lab</span></a><span class="top-label">LABORATORIO DE ELECTRÓNICA DIGITAL</span><span class="badge">CONTADORES · LFSR</span></header>
+  <main>
+    <nav class="breadcrumb" aria-label="Ruta"><a href="index.html#contadores">Contadores</a><span>/</span>LFSR de 4 bits</nav>
+    <section class="intro"><div><p class="eyebrow">DESPLAZA · REALIMENTA · OBSERVA</p><h1>LFSR de 4 bits</h1><p class="lead">Registro de desplazamiento con realimentación lineal: Q0 XOR Q1 vuelve a Q3 en cada flanco ascendente.</p></div></section>
+    <section class="panel counter-panel" aria-labelledby="counter-title">
+      <div class="workspace-heading"><h2 id="counter-title">Controla el LFSR</h2><button id="counter-restart" class="button secondary">Reiniciar demo</button></div>
+      <div class="counter-controls">
+        <button id="counter-clock" class="control-signal" aria-pressed="false"><span>CLK · CAMBIAR NIVEL</span><strong>0</strong><small>Siguiente: flanco ↑</small></button>
+        <button id="counter-pulse" class="button primary">Pulso de reloj ↑↓</button>
+        <button id="counter-reset" class="control-signal" aria-pressed="false"><span>INIT̅ · ACTIVO A 0</span><strong>1</strong><small>Inactivo</small></button>
+        <button id="counter-auto" class="button secondary" aria-pressed="false">Iniciar reloj automático</button>
+        <div class="counter-value"><span>Q3 Q2 Q1 Q0</span><output id="counter-binary">0001</output><span>Decimal <output id="counter-decimal">1</output> · Hex <output id="counter-hex">1</output></span></div>
+      </div>
+      <form id="lfsr-seed-form" class="lfsr-seed-form" novalidate><label for="lfsr-seed">Semilla Q3…Q0</label><input id="lfsr-seed" type="text" value="0001" maxlength="4" inputmode="numeric" autocomplete="off" aria-describedby="seed-help"><button class="button secondary" type="submit">Cargar semilla</button><span id="seed-help">4 bits. Prueba también 0000 para observar el bloqueo.</span></form>
+      <div class="counter-diagram" id="counter-diagram"></div>
+      <p class="counter-legend"><span class="signal-key high"></span>1 lógico <span class="signal-key"></span>0 lógico · Q0 es el bit de menor peso. Desplazamiento Q3 → Q2 → Q1 → Q0; realimentación Q0 ⊕ Q1.</p>
+      <p id="counter-feedback" role="status" aria-live="polite"></p>
+    </section>
+    <div class="counter-details">
+      <section class="panel counter-panel"><h2>Realimentación y siguiente estado</h2><p class="note">En cada subida, los cuatro biestables D capturan simultáneamente sus entradas. La XOR vale 1 si Q0 y Q1 son distintos.</p>
+        <table><thead><tr><th>Biestable</th><th>Entrada D</th><th>Próximo valor</th></tr></thead><tbody id="counter-excitation"></tbody></table>
+        <p class="note">Polinomio x⁴ + x + 1. Desde cualquier semilla no nula recorre 15 estados antes de repetirse. La semilla 0000 queda bloqueada. INIT̅ = 0 inicializa a 0001 de forma asíncrona: pone Q0 a 1 y los demás bits a 0. Al volver a 1, espera a la próxima subida.</p>
+      </section>
+      <section class="panel counter-panel"><h2>Últimos eventos</h2><table><thead><tr><th>Evento</th><th>CLK</th><th>INIT̅</th><th>Q3…Q0</th><th>Decimal</th></tr></thead><tbody id="counter-history"></tbody></table></section>
+    </div>
+    <footer><span>logiclab / Contadores</span><span>LFSR · XOR · PERÍODO 15</span></footer>
+  </main>
+</body>
+</html>

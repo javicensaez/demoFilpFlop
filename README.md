@@ -85,3 +85,9 @@ El programa «Acumulador con etiquetas» conserva la secuencia facilitada con `i
 `contador-jk.html`, en la categoría Contadores (antes de Máquina sencilla), reproduce un contador ascendente módulo 16 con reloj común por flanco ascendente y reset asíncrono activo a 0. Q0 es el bit de menor peso. Las excitaciones son J0=K0=1, J1=K1=Q0, J2=K2=Q0·Q1 y J3=K3=Q0·Q1·Q2. Todos los bits se calculan simultáneamente con el estado anterior.
 
 Incluye diagrama con niveles lógicos y dos AND de dos entradas en cascada (Q0·Q1 y su salida combinada con Q2), reloj manual, pulso completo, reloj automático, reset, lectura binaria/decimal/hexadecimal e historial. El nivel bajo del reloj conserva el estado; reset tiene prioridad y su liberación no cuenta sin una nueva subida. `counter-logic.js` contiene el motor independiente del DOM.
+
+## LFSR de 4 bits
+
+`lfsr-4.html` añade una segunda demo en Contadores. Usa cuatro biestables D con reloj común ascendente: Q3 siguiente = Q0 XOR Q1; Q2 siguiente = Q3; Q1 siguiente = Q2; Q0 siguiente = Q1. El diagrama conecta las derivaciones Q0 y Q1 a la XOR y devuelve su salida a D3, mostrando los niveles lógicos.
+
+Incluye reloj manual, pulsos, reloj automático, semilla configurable, lectura binaria/decimal/hexadecimal e historial. Empieza en 0001. INIT activo bajo inicializa asíncronamente a 0001 mediante preset de Q0 y clear de los demás bits. Una semilla no nula recorre 15 estados; 0000 queda bloqueado. Las pruebas verifican el período para las 15 semillas no nulas, los flancos, el bloqueo y la prioridad de inicialización.
