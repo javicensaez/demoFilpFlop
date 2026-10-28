@@ -1,0 +1,19 @@
+digraph Detector1011 {
+  inicio [shape=point];
+  inicio -> S0;
+  S0 [label="S0\n0"];
+  S1 [label="S1\n0"];
+  S2 [label="S2\n0"];
+  S3 [label="S3\n0"];
+  S4 [label="S4\n1"];
+  S0 -> S0 [label="0"];
+  S0 -> S1 [label="1"];
+  S1 -> S2 [label="0"];
+  S1 -> S1 [label="1"];
+  S2 -> S0 [label="0"];
+  S2 -> S3 [label="1"];
+  S3 -> S2 [label="0"];
+  S3 -> S4 [label="1"];
+  S4 -> S2 [label="0"];
+  S4 -> S1 [label="1"];
+}
