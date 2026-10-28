@@ -1,0 +1,10 @@
+digraph Bombilla {
+  inicio [shape=point];
+  inicio -> APAGADA;
+  APAGADA [label="APAGADA\n0"];
+  ENCENDIDA [label="ENCENDIDA\n1"];
+  APAGADA -> APAGADA [label="0"];
+  APAGADA -> ENCENDIDA [label="1"];
+  ENCENDIDA -> APAGADA [label="0"];
+  ENCENDIDA -> ENCENDIDA [label="1"];
+}

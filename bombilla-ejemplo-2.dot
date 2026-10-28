@@ -1,0 +1,17 @@
+digraph Bombilla {
+  inicio [shape=point];
+  inicio -> APA_NP;
+  APA_NP [label="APA_NP\n0"];
+  APA_P [label="APA_P\n1"];
+  ENC_NP [label="ENC_NP\n1"];
+  ENC_P [label="ENC_P\n0"];
+
+  APA_NP -> APA_NP [label="0"];
+  APA_NP -> APA_P [label="1"];
+  APA_P -> APA_P [label="1"];
+  APA_P -> ENC_NP [label="0"];
+  ENC_NP -> ENC_NP [label="0"];
+  ENC_NP -> ENC_P [label="1"];
+  ENC_P -> ENC_P [label="1"];
+  ENC_P -> APA_NP [label="0"];
+}
