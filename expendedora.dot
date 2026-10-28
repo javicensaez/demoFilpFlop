@@ -1,0 +1,27 @@
+digraph Expendedora {
+  inicio [shape=point];
+  inicio -> SALDO_0;
+  SALDO_0 [label="SALDO_0\n000"];
+  SALDO_050 [label="SALDO_050\n000"];
+  SALDO_1 [label="SALDO_1\n000"];
+  LATA [label="LATA\n100"];
+  CAMBIO_050 [label="CAMBIO_050\n101"];
+  CAMBIO_1 [label="CAMBIO_1\n110"];
+  CAMBIO_150 [label="CAMBIO_150\n111"];
+  SALDO_0 -> SALDO_0 [label="000"];
+  SALDO_0 -> CAMBIO_050 [label="100"];
+  SALDO_0 -> SALDO_1 [label="010"];
+  SALDO_0 -> SALDO_050 [label="001"];
+  SALDO_050 -> SALDO_050 [label="000"];
+  SALDO_050 -> CAMBIO_1 [label="100"];
+  SALDO_050 -> LATA [label="010"];
+  SALDO_050 -> SALDO_1 [label="001"];
+  SALDO_1 -> SALDO_1 [label="000"];
+  SALDO_1 -> CAMBIO_150 [label="100"];
+  SALDO_1 -> CAMBIO_050 [label="010"];
+  SALDO_1 -> LATA [label="001"];
+  LATA -> SALDO_0 [label="000"];
+  CAMBIO_050 -> SALDO_0 [label="000"];
+  CAMBIO_1 -> SALDO_0 [label="000"];
+  CAMBIO_150 -> SALDO_0 [label="000"];
+}
