@@ -1,0 +1,13 @@
+(() => {
+ const $=id=>document.getElementById(id),{bounds,minBits}=BinaryArithmetic;
+ let value,correct=0,attempts=0,graded=false;
+ const signed=()=>$('representation').value==='signed',bits=()=>Number($('bits').value),minimumTask=()=>$('task').value==='minimum';
+ function message(text,error=false){$('feedback').textContent=text;$('feedback').dataset.error=String(error);}
+ function grade(ok){if(!graded){graded=true;attempts++;if(ok)correct++;$('score').textContent=`${correct} / ${attempts} aciertos`;}}
+ function next(){const r=bounds(bits(),signed());value=Math.floor(Math.random()*(r.max-r.min+1))+r.min;graded=false;$('exercise-title').textContent=minimumTask()?'¿Cuántos bits necesitas?':'¿Qué valores puedes representar?';$('prompt').textContent=minimumTask()?`Representa ${value} ${signed()?'en complemento a 2':'sin signo'} con el mínimo número de bits.`:`Calcula el rango de ${bits()} bits ${signed()?'en complemento a 2':'sin signo'}.`;$('range').textContent=minimumTask()?`El generador propone valores representables con hasta ${bits()} bits.`:'Indica ambos extremos, incluidos en el rango.';$('range-answer').hidden=minimumTask();$('bits-answer').hidden=!minimumTask();['minimum','maximum','answer-bits'].forEach(id=>{$(id).value='';$(id).removeAttribute('aria-invalid');});$('explanation').hidden=true;message('');}
+ function integer(id){const text=$(id).value.trim();if(!/^-?\d+$/.test(text))throw new Error('Completa la respuesta con números enteros.');return Number(text);}
+ function explain(){const n=minimumTask()?minBits(value,signed()):bits(),r=bounds(n,signed());let text=signed()?`Con ${n} bits: mínimo −2^${n-1} = ${r.min}; máximo 2^${n-1} − 1 = ${r.max}.`:`Con ${n} bits: mínimo 0; máximo 2^${n} − 1 = ${r.max}.`;
+ if(minimumTask()){text=`${value} necesita ${n} ${n===1?'bit':'bits'}. `+text;if(n>1){const previous=bounds(n-1,signed());text+=` Con ${n-1} bits el rango es [${previous.min}, ${previous.max}] y no incluye ${value}.`;}else text+=' Usamos al menos un bit, también para representar cero.';}$('explanation-text').textContent=text;$('explanation').hidden=false;}
+ $('answer-form').onsubmit=e=>{e.preventDefault();try{const r=bounds(bits(),signed()),ok=minimumTask()?integer('answer-bits')===minBits(value,signed()):integer('minimum')===r.min&&integer('maximum')===r.max;grade(ok);message(ok?'Correcto.':'Todavía no coincide. Revisa el bit de signo y las potencias de dos.',!ok);if(ok)explain();}catch(error){message(error.message,true);}};
+ $('solution').onclick=()=>{grade(false);explain();message('Solución mostrada.');};$('new').onclick=next;['representation','bits','task'].forEach(id=>$(id).onchange=next);next();
+})();

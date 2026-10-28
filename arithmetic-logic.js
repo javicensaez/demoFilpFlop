@@ -1,0 +1,6 @@
+(function(root){
+ function bounds(bits,signed=false){if(!Number.isInteger(bits)||bits<1||bits>16)throw new Error('El ancho debe estar entre 1 y 16 bits.');return signed?{min:-(2**(bits-1)),max:2**(bits-1)-1}:{min:0,max:2**bits-1};}
+ function minBits(value,signed=false){if(!Number.isInteger(value)||(!signed&&value<0))throw new Error('Valor entero no válido.');for(let bits=1;bits<=16;bits++){const r=bounds(bits,signed);if(value>=r.min&&value<=r.max)return bits;}throw new Error('El valor necesita más de 16 bits.');}
+ function add(a,b,bits,signed=false){const {min,max}=bounds(bits,signed);if(!Number.isInteger(a)||!Number.isInteger(b)||a<min||a>max||b<min||b>max)throw new Error('Operandos fuera de rango.');const modulus=2**bits,ua=(a+modulus)%modulus,ub=(b+modulus)%modulus,total=ua+ub,raw=total%modulus,result=signed&&raw>=modulus/2?raw-modulus:raw;return {a:ua.toString(2).padStart(bits,'0'),b:ub.toString(2).padStart(bits,'0'),binary:raw.toString(2).padStart(bits,'0'),result,exact:a+b,carry:Number(total>=modulus),overflow:Number(a+b<min||a+b>max)};}
+ const api={bounds,minBits,add};if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.BinaryArithmetic=api;
+})(globalThis);

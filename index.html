@@ -24,13 +24,65 @@
       </div>
     </section>
     <div class="category-tabs" role="group" aria-label="Categorías de laboratorios">
-      <button id="category-biestables" class="category-button selected" aria-pressed="true" aria-controls="biestables">Biestables <span>5 demos</span></button>
+      <button id="category-codificacion-binaria" class="category-button selected" aria-pressed="true" aria-controls="codificacion-binaria">Codificación binaria <span>7 demos</span></button>
+      <button id="category-biestables" class="category-button" aria-pressed="false" aria-controls="biestables">Biestables <span>5 demos</span></button>
       <button id="category-registros" class="category-button" aria-pressed="false" aria-controls="registros">Registros <span>5 demos</span></button>
       <button id="category-contadores" class="category-button" aria-pressed="false" aria-controls="contadores">Contadores <span>2 demos</span></button>
       <button id="category-fsm" class="category-button" aria-pressed="false" aria-controls="fsm">Máquinas de estado <span>6 demos</span></button>
       <button id="category-maquina" class="category-button" aria-pressed="false" aria-controls="maquina">Máquina sencilla <span>3 demos</span></button>
     </div>
-    <section id="biestables" class="category-panel" aria-labelledby="category-biestables">
+    <section id="codificacion-binaria" class="category-panel" aria-labelledby="category-codificacion-binaria">
+      <nav class="demo-catalog" aria-label="Demos de codificación binaria">
+        <a class="demo-card panel" href="binario-puro.html">
+          <div class="card-heading"><span class="eyebrow">CODIFICACIÓN 01</span><span class="card-symbol">01</span></div>
+          <h2>Binario puro sin signo</h2>
+          <p>Convierte de binario a decimal y de decimal a binario, y comprueba los pesos de cada bit.</p>
+          <div class="card-tags"><span>Sin signo</span><span>4 a 16 bits</span></div>
+          <span class="card-link">Abrir laboratorio <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="demo-card panel" href="complemento-a-2.html">
+          <div class="card-heading"><span class="eyebrow">CODIFICACIÓN 02</span><span class="card-symbol">±</span></div>
+          <h2>Complemento a 2</h2>
+          <p>Convierte entre decimal y complemento a 2 e interpreta el peso negativo del bit de signo.</p>
+          <div class="card-tags"><span>Con signo</span><span>4 a 16 bits</span></div>
+          <span class="card-link">Abrir laboratorio <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="demo-card panel" href="bcd.html">
+          <div class="card-heading"><span class="eyebrow">CODIFICACIÓN 03</span><span class="card-symbol">8421</span></div>
+          <h2>BCD 8421</h2>
+          <p>Convierte entre decimal y BCD: cuatro bits para cada cifra y validación de los grupos.</p>
+          <div class="card-tags"><span>1 a 4 cifras</span><span>Pesos 8 · 4 · 2 · 1</span></div>
+          <span class="card-link">Abrir laboratorio <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="demo-card panel" href="octal.html">
+          <div class="card-heading"><span class="eyebrow">CODIFICACIÓN 04</span><span class="card-symbol">8</span></div>
+          <h2>Octal sin signo</h2>
+          <p>Convierte entre octal, decimal y binario usando potencias de ocho y grupos de tres bits.</p>
+          <div class="card-tags"><span>Base 8</span><span>1 a 4 dígitos</span></div>
+          <span class="card-link">Abrir laboratorio <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="demo-card panel" href="hexadecimal.html">
+          <div class="card-heading"><span class="eyebrow">CODIFICACIÓN 05</span><span class="card-symbol">A–F</span></div>
+          <h2>Hexadecimal sin signo</h2>
+          <p>Convierte entre hexadecimal, decimal y binario, agrupando los bits de cuatro en cuatro.</p>
+          <div class="card-tags"><span>Base 16</span><span>1 a 4 dígitos</span></div>
+          <span class="card-link">Abrir laboratorio <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="demo-card panel" href="rango-bits.html">
+          <div class="card-heading"><span class="eyebrow">CODIFICACIÓN 06</span><span class="card-symbol">n</span></div>
+          <h2>Rango y número de bits</h2><p>Calcula el rango representable y el mínimo de bits necesario, sin signo o en complemento a 2.</p>
+          <div class="card-tags"><span>Rangos</span><span>Bits mínimos</span></div>
+          <span class="card-link">Abrir laboratorio <span aria-hidden="true">→</span></span>
+        </a>
+        <a class="demo-card panel" href="suma-binaria.html">
+          <div class="card-heading"><span class="eyebrow">CODIFICACIÓN 07</span><span class="card-symbol">+</span></div>
+          <h2>Suma binaria</h2><p>Suma números binarios y distingue el acarreo del desbordamiento en complemento a 2.</p>
+          <div class="card-tags"><span>Acarreo</span><span>Desbordamiento</span></div>
+          <span class="card-link">Abrir laboratorio <span aria-hidden="true">→</span></span>
+        </a>
+      </nav>
+    </section>
+    <section id="biestables" class="category-panel" aria-labelledby="category-biestables" hidden>
     <nav class="demo-catalog" aria-label="Demos de biestables">
       <a class="demo-card panel" href="rs.html">
         <div class="card-heading"><span class="eyebrow">DEMO 01</span><span class="card-symbol">RS</span></div>
