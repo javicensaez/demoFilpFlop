@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simulador de máquina sencilla · Logic Lab</title>
+  <link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="simulator.css">
+  <script defer src="machine-logic.js"></script><script defer src="program-logic.js"></script><script defer src="simulator-logic.js"></script><script defer src="simulator-app.js"></script>
+</head>
+<body class="simulator-page">
+  <header class="topbar"><a class="brand" href="index.html"><span class="brand-icon">⌁</span> logic<span>lab</span></a><span class="badge">MÁQUINA SENCILLA · SIMULADOR</span></header>
+  <main>
+    <nav class="breadcrumb" aria-label="Ruta"><a href="index.html#maquina">Máquina sencilla</a><span>/</span>Simulador</nav>
+    <section class="intro"><div><p class="eyebrow">ESCRIBE · EJECUTA · OBSERVA</p><h1>Simulador de máquina sencilla</h1><p class="lead">Ejecuta tu ensamblador con etiquetas y observa cómo evolucionan los datos de la dirección 100 a la 127.</p></div></section>
+    <div class="sim-editor-grid">
+      <section class="panel sim-panel"><div class="sim-heading"><label for="sim-code">Instrucciones · desde 0</label><select id="sim-example" aria-label="Programa de ejemplo"></select><button id="sim-example-load" class="button secondary">Cargar ejemplo</button></div><textarea id="sim-code" spellcheck="false" aria-describedby="sim-syntax"></textarea></section>
+      <section class="panel sim-panel"><label for="sim-data">Datos · direcciones 100–127</label><textarea id="sim-data" spellcheck="false" aria-describedby="sim-data-help"></textarea><p class="note" id="sim-data-help">Una etiqueta y un valor decimal por línea, por ejemplo <code>zero: 0;</code>. Se asignan desde 100, en orden; las posiciones restantes empiezan en cero.</p></section>
+    </div>
+    <p class="note" id="sim-syntax">ADD/CMP/MOV fuente, destino · BEQ etiqueta. Admite minúsculas, etiquetas, direcciones numéricas, terminadores ; y comentarios #. Datos de 16 bits sin signo (0–65535); ADD desborda módulo 65536 y actualiza Z según el resultado guardado.</p>
+    <section class="panel sim-panel">
+      <div class="sim-controls"><button id="sim-assemble" class="button primary">Ensamblar y reiniciar</button><button id="sim-step" class="button secondary">Paso a paso</button><button id="sim-run" class="button secondary">Ejecutar</button><button id="sim-pause" class="button secondary" disabled>Pausar</button><button id="sim-restart" class="button secondary">Reiniciar ejecución</button><label for="sim-speed">Velocidad <select id="sim-speed"><option value="1000">1 instr./s</option><option value="500" selected>2 instr./s</option><option value="200">5 instr./s</option></select></label></div>
+      <div class="sim-registers"><span>PC <output id="sim-pc">0</output></span><span>Z <output id="sim-z">0</output></span><span>Instrucciones ejecutadas <output id="sim-steps">0</output></span><span id="sim-status">Listo</span></div>
+      <p id="sim-feedback" role="status" aria-live="polite"></p>
+    </section>
+    <div class="sim-results-grid">
+      <section class="panel sim-panel"><h2>Programa ensamblado</h2><p class="note">La flecha señala la próxima instrucción. La última ejecutada aparece sombreada.</p><div class="sim-table-scroll"><table><thead><tr><th>PC</th><th>Instrucción</th><th>Código máquina</th><th>Hex.</th></tr></thead><tbody id="sim-listing"></tbody></table></div></section>
+      <section class="panel sim-panel"><h2>Memoria de datos</h2><p class="note">Se resalta la última posición escrita, incluso si conserva el mismo valor.</p><div class="sim-table-scroll"><table><thead><tr><th>Dir.</th><th>Etiqueta</th><th>Inicial</th><th>Actual</th><th>Hex.</th><th>Cambio</th></tr></thead><tbody id="sim-memory"></tbody></table></div></section>
+    </div>
+    <section class="panel sim-panel sim-history"><h2>Evolución paso a paso</h2><div class="sim-table-scroll"><table><thead><tr><th>Paso</th><th>PC</th><th>Instrucción</th><th>Resultado</th><th>Z</th><th>PC siguiente</th></tr></thead><tbody id="sim-history"></tbody></table></div><p class="note">Últimas 100 instrucciones. Ejecutar pausa automáticamente al llegar al final, a un salto sobre sí mismo o tras 1000 pasos seguidos. Puedes continuar paso a paso.</p></section>
+    <footer><span>logiclab / Máquina sencilla</span><span>ADD · CMP · MOV · BEQ</span></footer>
+  </main>
+</body>
+</html>

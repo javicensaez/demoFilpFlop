@@ -103,3 +103,11 @@ Verificación: `node --test tests/*.test.cjs`.
 `ram-4.html`, en Registros, simula una RAM de 4 palabras de 4 bits (16 bits en total). DIN llega a todas las entradas D. A1 A0 se conecta al decodificador 2→4 y al selector del multiplexador 4→1. WE habilita el decodificador: solo el registro seleccionado recibe Enable = 1 y captura DIN en el flanco ascendente del reloj común. WE = 0 impide escribir. Las cuatro salidas Q llegan al multiplexador; DOUT presenta la palabra de la dirección actual sin esperar al reloj.
 
 Incluye edición de bits de datos y dirección, WE, reloj manual, pulso completo, diagrama con buses y enables, tabla de memoria e historial. Cambiar datos, dirección o WE sin una subida no modifica la memoria. Reiniciar pone palabras y controles a cero. Modelo ideal sin retardos. Motor independiente en `ram-logic.js`; pruebas en `tests/ram.test.cjs`.
+
+## Simulador de máquina sencilla
+
+`simulador-maquina.html` permite escribir instrucciones con etiquetas (direcciones 0–99) y datos en un editor independiente (100–127, asignados en orden). Admite los cinco programas de ejemplo, instrucciones en mayúsculas o minúsculas, etiquetas aisladas, operandos numéricos, terminadores `;` y comentarios `#`. Cada dato es un entero sin signo de 16 bits; ADD guarda la suma módulo 65536. La interfaz indica esta convención.
+
+Ensamblar y reiniciar valida la sintaxis y las referencias, genera código máquina y carga memoria. Paso a paso o Ejecutar muestra PC, Z, instrucción siguiente, memoria inicial y actual, última escritura e historial de las últimas 100 instrucciones. MOV y ADD actualizan Z según el valor guardado; CMP actualiza Z por igualdad sin escribir; BEQ conserva Z. Los saltos deben apuntar a instrucciones cargadas y los operandos de datos a 100–127.
+
+La ejecución automática se puede pausar y cambiar de velocidad; pausa al terminar, al ejecutar un BEQ tomado hacia sí mismo o tras 1000 pasos consecutivos. Los demás bucles continúan hasta pausar o alcanzar ese límite. Editar los textos pausa y exige ensamblar de nuevo. Reiniciar ejecución restaura memoria, PC y Z. El motor `simulator-logic.js` no depende del DOM.
