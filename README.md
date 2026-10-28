@@ -111,3 +111,11 @@ Incluye edición de bits de datos y dirección, WE, reloj manual, pulso completo
 Ensamblar y reiniciar valida la sintaxis y las referencias, genera código máquina y carga memoria. Paso a paso o Ejecutar muestra PC, Z, instrucción siguiente, memoria inicial y actual, última escritura e historial de las últimas 100 instrucciones. MOV y ADD actualizan Z según el valor guardado; CMP actualiza Z por igualdad sin escribir; BEQ conserva Z. Los saltos deben apuntar a instrucciones cargadas y los operandos de datos a 100–127.
 
 La ejecución automática se puede pausar y cambiar de velocidad; pausa al terminar, al ejecutar un BEQ tomado hacia sí mismo o tras 1000 pasos consecutivos. Los demás bucles continúan hasta pausar o alcanzar ese límite. Editar los textos pausa y exige ensamblar de nuevo. Reiniciar ejecución restaura memoria, PC y Z. El motor `simulator-logic.js` no depende del DOM.
+
+## FSM · Depósito de agua con dos bombas
+
+`fsm-deposito.html` implementa la máquina de Moore del DOT facilitado, conservado como `deposito-fsm.dot`. Los sensores se leen bajo–alto y las salidas B1–B2: APA/APB = 00, B1 = 01, B2 = 10, ENA/ENB = 11. Los nombres de estado B1/B2 no se interpretan como nombres de bomba. Inicio por defecto APA (seleccionable), pues el DOT no indica un estado inicial.
+
+La demo muestra nivel, sensores, bombas, grafo resaltado, tabla completa e historial. El nivel se puede ajustar sin modificar el estado; Aplicar sensores evalúa una transición sin mover el agua. Paso de simulación y el modo automático evalúan sensores y luego actualizan el nivel según las salidas resultantes. El modelo ilustrativo usa umbrales bajo=30% y alto=75%, sensores activos al estar cubiertos, caudal de 8 puntos por bomba y consumo ajustable.
+
+El modo de sensores manuales permite probar todas las combinaciones sin evolución del agua. Una transición no definida en el DOT conserva estado y nivel, muestra una explicación y pausa. No se añaden transiciones para 01, APA/APB con 00 ni ENA/ENB con 11. Reiniciar utiliza el estado inicial elegido, nivel 85% y consumo 6. El motor `tank-logic.js` es independiente del DOM.

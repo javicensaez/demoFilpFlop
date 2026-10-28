@@ -1,0 +1,29 @@
+digraph FSM {
+  rankdir=LR;
+  graph [bgcolor="transparent", pad="0.3", nodesep="0.8", ranksep="1.3"];
+  node [shape=circle, style=filled, fillcolor="white", color="#9bafa4", fontname="sans-serif", fontsize=17];
+  edge [fontname="monospace", fontsize=14, color="#9bafa4", arrowsize=0.8];
+  {rank=same; APA; APB;}
+  {rank=same; B1; B2;}
+  {rank=same; ENA; ENB;}
+  APA [id="state-APA", label="APA\n00"];
+  APB [id="state-APB", label="APB\n00"];
+  B1 [id="state-B1", label="B1\n01"];
+  B2 [id="state-B2", label="B2\n10"];
+  ENA [id="state-ENA", label="ENA\n11"];
+  ENB [id="state-ENB", label="ENB\n11"];
+  APA -> APA [id="edge-APA-11", label="11"];
+  APA -> B1 [id="edge-APA-10", label="10"];
+  APB -> APB [id="edge-APB-11", label="11"];
+  APB -> B2 [id="edge-APB-10", label="10"];
+  B1 -> ENA [id="edge-B1-00", label="00"];
+  B1 -> APB [id="edge-B1-11", label="11"];
+  B1 -> B1 [id="edge-B1-10", label="10"];
+  B2 -> APA [id="edge-B2-11", label="11"];
+  B2 -> B2 [id="edge-B2-10", label="10"];
+  B2 -> ENB [id="edge-B2-00", label="00"];
+  ENA -> B2 [id="edge-ENA-10", label="10"];
+  ENA -> ENA [id="edge-ENA-00", label="00"];
+  ENB -> B1 [id="edge-ENB-10", label="10"];
+  ENB -> ENB [id="edge-ENB-00", label="00"];
+}

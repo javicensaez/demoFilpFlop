@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>FSM · Depósito de agua · Logic Lab</title><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="tank.css"><script defer src="tank-logic.js"></script><script defer src="tank-app.js"></script></head>
+<body class="tank-page"><header class="topbar"><a class="brand" href="index.html"><span class="brand-icon">⌁</span> logic<span>lab</span></a><span class="badge">FSM · DEPÓSITO</span></header><main>
+<nav class="breadcrumb" aria-label="Ruta"><a href="index.html#fsm">Máquinas de estado</a><span>/</span>Depósito de agua</nav>
+<section class="intro"><div><p class="eyebrow">NIVEL · ESTADO · BOMBAS</p><h1>Un depósito, dos bombas</h1><p class="lead">Explora la máquina de Moore: sensores en orden bajo–alto y salidas en orden B1–B2.</p></div></section>
+<div class="tank-layout">
+<section class="panel tank-panel"><h2>Depósito de agua</h2>
+<div class="tank-view" aria-label="Nivel del depósito"><div id="tank-water" class="tank-water"></div><div id="tank-high" class="tank-mark high"><span>Nivel alto · 75%</span></div><div id="tank-low" class="tank-mark low"><span>Nivel bajo · 30%</span></div><output id="tank-level" class="tank-level">85%</output></div>
+<label for="tank-slider">Nivel de agua</label><input id="tank-slider" type="range" min="0" max="100" value="85">
+<div class="tank-pumps"><div class="tank-pump" id="pump-1"><strong>Bomba B1</strong><output>0 · Apagada</output></div><div class="tank-pump" id="pump-2"><strong>Bomba B2</strong><output>0 · Apagada</output></div></div>
+<div class="tank-readouts"><span>Estado<output id="tank-state">APA</output></span><span>Bajo–alto<output id="tank-input">11</output></span><span>B1–B2<output id="tank-output">00</output></span></div>
+<div class="tank-controls"><button id="tank-step" class="button primary">Aplicar sensores</button><button id="tank-tick" class="button secondary">Paso de simulación</button><button id="tank-auto" class="button secondary" aria-pressed="false">Iniciar simulación</button></div>
+<label for="tank-demand">Consumo por paso: <output id="tank-demand-value">6</output> puntos de nivel</label><input id="tank-demand" type="range" min="0" max="20" value="6">
+<p class="note">Modelo ilustrativo: cada bomba llena 8 puntos por paso; el consumo resta el valor indicado. Primero se aplican los sensores y después se actualiza el agua. Mover el nivel no cambia el estado hasta aplicar los sensores.</p>
+<div class="tank-manual"><label><input id="tank-manual" type="checkbox"> Probar sensores manualmente</label><div id="tank-manual-input" hidden><button class="button secondary" id="tank-sensor-low" aria-pressed="true">Bajo: 1</button><button class="button secondary" id="tank-sensor-high" aria-pressed="true">Alto: 1</button></div></div>
+<label for="tank-start">Estado inicial</label><select id="tank-start"><option>APA</option><option>APB</option><option>B1</option><option>B2</option><option>ENA</option><option>ENB</option></select><button class="button secondary" id="tank-reset">Reiniciar</button>
+</section>
+<section class="panel tank-panel"><h2>Diagrama de estados</h2><div class="tank-graph"><svg role="img" aria-label="Máquina de estados del depósito: APA, APB, B1, B2, ENA y ENB" width="502pt" height="390pt"
+ viewBox="0.00 0.00 502.00 390.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(21.6 368.35)">
+<title>FSM</title>
+<!-- APA -->
+<g id="state&#45;APA" class="node">
+<title>APA</title>
+<ellipse fill="white" stroke="#9bafa4" cx="39.6" cy="-231.9" rx="39.6" ry="39.6"/>
+<text xml:space="preserve" text-anchor="middle" x="39.6" y="-239.75" font-family="sans-serif" font-size="17.00">APA</text>
+<text xml:space="preserve" text-anchor="middle" x="39.6" y="-215.75" font-family="sans-serif" font-size="17.00">00</text>
+</g>
+<!-- APA&#45;&gt;APA -->
+<g id="edge&#45;APA&#45;11" class="edge">
+<title>APA&#45;&gt;APA</title>
+<path fill="none" stroke="#9bafa4" d="M24.31,-268.95C18.2,-298.74 23.3,-329.5 39.6,-329.5 54.24,-329.5 59.84,-304.67 56.4,-278.02"/>
+<polygon fill="#9bafa4" stroke="#9bafa4" points="59.21,-277.87 55.13,-270.44 53.69,-278.8 59.21,-277.87"/>
+<text xml:space="preserve" text-anchor="middle" x="39.6" y="-333.45" font-family="monospace" font-size="14.00">11</text>
+</g>
+<!-- B1 -->
+<g id="state&#45;B1" class="node">
+<title>B1</title>
+<ellipse fill="white" stroke="#9bafa4" cx="229.29" cy="-231.9" rx="39.6" ry="39.6"/>
+<text xml:space="preserve" text-anchor="middle" x="229.29" y="-239.75" font-family="sans-serif" font-size="17.00">B1</text>
+<text xml:space="preserve" text-anchor="middle" x="229.29" y="-215.75" font-family="sans-serif" font-size="17.00">01</text>
+</g>
+<!-- APA&#45;&gt;B1 -->
+<g id="edge&#45;APA&#45;10" class="edge">
+<title>APA&#45;&gt;B1</title>
+<path fill="none" stroke="#9bafa4" d="M79.49,-231.9C108.68,-231.9 148.83,-231.9 180.07,-231.9"/>
+<polygon fill="#9bafa4" stroke="#9bafa4" points="179.94,-234.7 187.94,-231.9 179.94,-229.1 179.94,-234.7"/>
+<text xml:space="preserve" text-anchor="middle" x="134.45" y="-235.85" font-family="monospace" font-size="14.00">10</text>
+</g>
+<!-- APB -->
+<g id="state&#45;APB" class="node">
+<title>APB</title>
+<ellipse fill="white" stroke="#9bafa4" cx="39.6" cy="-42.9" rx="39.6" ry="39.6"/>
+<text xml:space="preserve" text-anchor="middle" x="39.6" y="-50.75" font-family="sans-serif" font-size="17.00">APB</text>
+<text xml:space="preserve" text-anchor="middle" x="39.6" y="-26.75" font-family="sans-serif" font-size="17.00">00</text>
+</g>
+<!-- APB&#45;&gt;APB -->
+<g id="edge&#45;APB&#45;11" class="edge">
+<title>APB&#45;&gt;APB</title>
+<path fill="none" stroke="#9bafa4" d="M24.31,-79.95C18.2,-109.74 23.3,-140.5 39.6,-140.5 54.24,-140.5 59.84,-115.67 56.4,-89.02"/>
+<polygon fill="#9bafa4" stroke="#9bafa4" points="59.21,-88.87 55.13,-81.44 53.69,-89.8 59.21,-88.87"/>
+<text xml:space="preserve" text-anchor="middle" x="39.6" y="-144.45" font-family="monospace" font-size="14.00">11</text>
+</g>
+<!-- B2 -->
+<g id="state&#45;B2" class="node">
+<title>B2</title>
+<ellipse fill="white" stroke="#9bafa4" cx="229.29" cy="-42.9" rx="39.6" ry="39.6"/>
+<text xml:space="preserve" text-anchor="middle" x="229.29" y="-50.75" font-family="sans-serif" font-size="17.00">B2</text>
+<text xml:space="preserve" text-anchor="middle" x="229.29" y="-26.75" font-family="sans-serif" font-size="17.00">10</text>
+</g>
+<!-- APB&#45;&gt;B2 -->
+<g id="edge&#45;APB&#45;10" class="edge">
+<title>APB&#45;&gt;B2</title>
+<path fill="none" stroke="#9bafa4" d="M73.87,-22.55C89.22,-14.32 108.02,-5.8 126.2,-1.65 147.53,3.22 170.2,-4.51 188.74,-14.55"/>
+<polygon fill="#9bafa4" stroke="#9bafa4" points="187.31,-16.96 195.64,-18.53 190.11,-12.11 187.31,-16.96"/>
+<text xml:space="preserve" text-anchor="middle" x="134.45" y="-5.6" font-family="monospace" font-size="14.00">10</text>
+</g>
+<!-- B1&#45;&gt;APB -->
+<g id="edge&#45;B1&#45;11" class="edge">
+<title>B1&#45;&gt;APB</title>
+<path fill="none" stroke="#9bafa4" d="M211.53,-196.31C192.55,-157.27 161.8,-98 142.7,-81.65 127.1,-68.3 106.43,-59.31 87.77,-53.38"/>
+<polygon fill="#9bafa4" stroke="#9bafa4" points="88.72,-50.74 80.25,-51.14 87.12,-56.11 88.72,-50.74"/>
+<text xml:space="preserve" text-anchor="middle" x="134.45" y="-85.6" font-family="monospace" font-size="14.00">11</text>
+</g>
+<!-- B1&#45;&gt;B1 -->
+<g id="edge&#45;B1&#45;10" class="edge">
+<title>B1&#45;&gt;B1</title>
+<path fill="none" stroke="#9bafa4" d="M214.01,-268.95C207.9,-298.74 212.99,-329.5 229.29,-329.5 243.94,-329.5 249.54,-304.67 246.09,-278.02"/>
+<polygon fill="#9bafa4" stroke="#9bafa4" points="248.91,-277.87 244.83,-270.44 243.38,-278.8 248.91,-277.87"/>
+<text xml:space="preserve" text-anchor="middle" x="229.29" y="-333.45" font-family="monospace" font-size="14.00">10</text>
+</g>
+<!-- ENA -->
+<g id="state&#45;ENA" class="node">
+<title>ENA</title>
+<ellipse fill="white" stroke="#9bafa4" cx="418.99" cy="-231.9" rx="39.6" ry="39.6"/>
+<text xml:space="preserve" text-anchor="middle" x="418.99" y="-239.75" font-family="sans-serif" font-size="17.00">ENA</text>
+<text xml:space="preserve" text-anchor="middle" x="418.99" y="-215.75" font-family="sans-serif" font-size="17.00">11</text>
+</g>
+<!-- B1&#45;&gt;ENA -->
+<g id="edge&#45;B1&#45;00" class="edge">
+<title>B1&#45;&gt;ENA</title>
+<path fill="none" stroke="#9bafa4" d="M269.18,-231.9C298.38,-231.9 338.53,-231.9 369.76,-231.9"/>
+<polygon fill="#9bafa4" stroke="#9bafa4" points="369.64,-234.7 377.64,-231.9 369.64,-229.1 369.64,-234.7"/>
+<text xml:space="preserve" text-anchor="middle" x="324.14" y="-235.85" font-family="monospace" font-size="14.00">00</text>
+</g>
+<!-- B2&#45;&gt;APA -->
+<g id="edge&#45;B2&#45;11" class="edge">
+<title>B2&#45;&gt;APA</title>
+<path fill="none" stroke="#9bafa4" d="M200.79,-70.59C167.37,-104.24 110.99,-161.02 74.8,-197.45"/>
+<polygon fill="#9bafa4" stroke="#9bafa4" points="73.01,-195.29 69.36,-202.94 76.98,-199.23 73.01,-195.29"/>
+<text xml:space="preserve" text-anchor="middle" x="134.45" y="-147.02" font-family="monospace" font-size="14.00">11</text>
+</g>
+<!-- B2&#45;&gt;B2 -->
+<g id="edge&#45;B2&#45;10" class="edge">
+<title>B2&#45;&gt;B2</title>
+<path fill="none" stroke="#9bafa4" d="M214.01,-79.95C207.9,-109.74 212.99,-140.5 229.29,-140.5 243.94,-140.5 249.54,-115.67 246.09,-89.02"/>
+<polygon fill="#9bafa4" stroke="#9bafa4" points="248.91,-88.87 244.83,-81.44 243.38,-89.8 248.91,-88.87"/>
+<text xml:space="preserve" text-anchor="middle" x="229.29" y="-144.45" font-family="monospace" font-size="14.00">10</text>
+</g>
+<!-- ENB -->
+<g id="state&#45;ENB" class="node">
+<title>ENB</title>
+<ellipse fill="white" stroke="#9bafa4" cx="418.99" cy="-42.9" rx="39.6" ry="39.6"/>
+<text xml:space="preserve" text-anchor="middle" x="418.99" y="-50.75" font-family="sans-serif" font-size="17.00">ENB</text>
+<text xml:space="preserve" text-anchor="middle" x="418.99" y="-26.75" font-family="sans-serif" font-size="17.00">11</text>
+</g>
+<!-- B2&#45;&gt;ENB -->
+<g id="edge&#45;B2&#45;00" class="edge">
+<title>B2&#45;&gt;ENB</title>
+<path fill="none" stroke="#9bafa4" d="M263.57,-22.55C278.91,-14.32 297.72,-5.8 315.89,-1.65 337.23,3.22 359.89,-4.51 378.44,-14.55"/>
+<polygon fill="#9bafa4" stroke="#9bafa4" points="377.01,-16.96 385.34,-18.53 379.81,-12.11 377.01,-16.96"/>
+<text xml:space="preserve" text-anchor="middle" x="324.14" y="-5.6" font-family="monospace" font-size="14.00">00</text>
+</g>
+<!-- ENA&#45;&gt;B2 -->
+<g id="edge&#45;ENA&#45;10" class="edge">
+<title>ENA&#45;&gt;B2</title>
+<path fill="none" stroke="#9bafa4" d="M401.22,-196.31C382.24,-157.27 351.49,-98 332.39,-81.65 316.79,-68.3 296.13,-59.31 277.47,-53.38"/>
+<polygon fill="#9bafa4" stroke="#9bafa4" points="278.42,-50.74 269.95,-51.14 276.82,-56.11 278.42,-50.74"/>
+<text xml:space="preserve" text-anchor="middle" x="324.14" y="-85.6" font-family="monospace" font-size="14.00">10</text>
+</g>
+<!-- ENA&#45;&gt;ENA -->
+<g id="edge&#45;ENA&#45;00" class="edge">
+<title>ENA&#45;&gt;ENA</title>
+<path fill="none" stroke="#9bafa4" d="M403.71,-268.95C397.59,-298.74 402.69,-329.5 418.99,-329.5 433.64,-329.5 439.24,-304.67 435.79,-278.02"/>
+<polygon fill="#9bafa4" stroke="#9bafa4" points="438.6,-277.87 434.52,-270.44 433.08,-278.8 438.6,-277.87"/>
+<text xml:space="preserve" text-anchor="middle" x="418.99" y="-333.45" font-family="monospace" font-size="14.00">00</text>
+</g>
+<!-- ENB&#45;&gt;B1 -->
+<g id="edge&#45;ENB&#45;10" class="edge">
+<title>ENB&#45;&gt;B1</title>
+<path fill="none" stroke="#9bafa4" d="M390.49,-70.59C357.07,-104.24 300.69,-161.02 264.5,-197.45"/>
+<polygon fill="#9bafa4" stroke="#9bafa4" points="262.71,-195.29 259.06,-202.94 266.68,-199.23 262.71,-195.29"/>
+<text xml:space="preserve" text-anchor="middle" x="324.14" y="-147.02" font-family="monospace" font-size="14.00">10</text>
+</g>
+<!-- ENB&#45;&gt;ENB -->
+<g id="edge&#45;ENB&#45;00" class="edge">
+<title>ENB&#45;&gt;ENB</title>
+<path fill="none" stroke="#9bafa4" d="M403.71,-79.95C397.59,-109.74 402.69,-140.5 418.99,-140.5 433.64,-140.5 439.24,-115.67 435.79,-89.02"/>
+<polygon fill="#9bafa4" stroke="#9bafa4" points="438.6,-88.87 434.52,-81.44 433.08,-89.8 438.6,-88.87"/>
+<text xml:space="preserve" text-anchor="middle" x="418.99" y="-144.45" font-family="monospace" font-size="14.00">00</text>
+</g>
+</g>
+</svg>
+</div><p class="note">Verde: estado actual. Azul: última transición aplicada. Los bits dentro del estado son B1–B2; los de las flechas son bajo–alto.</p><p id="tank-feedback" role="status" aria-live="polite"></p>
+<p class="note">Se respeta el DOT: el estado llamado B1 tiene salida 01 (bomba B2 encendida), y B2 tiene salida 10 (bomba B1 encendida). Inicio elegido: APA; el DOT no especifica uno.</p>
+<h2>Tabla de transiciones</h2><div class="tank-table-wrap"><table><thead><tr><th>Estado</th><th>B1–B2</th><th>00</th><th>10</th><th>11</th><th>01</th></tr></thead><tbody id="tank-transitions"></tbody></table></div><p class="note">— indica transición no definida: no se aplica ningún cambio de estado y la simulación se pausa. 01 es una combinación físicamente incoherente si los sensores valen 1 al estar cubiertos de agua. APA/APB con 00 y ENA/ENB con 11 tampoco están definidos en el DOT.</p>
+</section></div>
+<section class="panel tank-panel tank-history"><h2>Historial de transiciones</h2><div class="tank-table-wrap"><table><thead><tr><th>Paso</th><th>Origen</th><th>Bajo–alto</th><th>Destino</th><th>B1–B2</th><th>Nivel</th></tr></thead><tbody id="tank-history"></tbody></table></div><p class="note">Últimos 30 pasos; las entradas corresponden al nivel anterior al paso.</p></section>
+<footer><span>logiclab / FSM</span><span>DEPÓSITO · MÁQUINA DE MOORE</span></footer></main></body></html>
