@@ -1,0 +1,9 @@
+const {test}=require('node:test');
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const {parse,step,advance}=require('../wiper-logic.js');
+const source=fs.readFileSync('limpiaparabrisas.dot','utf8');
+test('el ejemplo completa el barrido y aparca al soltar el pulsador',()=>{const m=parse(source);let state=m.initial,position=100;const visited=new Set();for(let n=0;n<100;n++){const input=`${n<5?1:0}${Number(position===0)}${Number(position===100)}`;const r=step(m,state,input);state=r.state;position=advance(position,r.output);visited.add(state);}assert.deepEqual([...visited].sort(),['DERECHA','IZQUIERDA','PARADO']);assert.equal(state,'PARADO');assert.equal(position,100);});
+test('salidas, límites, transiciones ausentes y ambigüedad',()=>{assert.equal(advance(50,'10'),45);assert.equal(advance(50,'01'),55);for(const bits of ['00','11'])assert.equal(advance(50,bits),50);assert.equal(advance(0,'10'),0);assert.equal(advance(100,'01'),100);assert.throws(()=>parse(source.replace('label="0xx"','label="xxx"')),/ambiguas/);const m=parse('digraph { A [label="A\\n11"]; A -> A [label="000"]; }');assert.throws(()=>step(m,'A','100'),/No hay transición/);assert.throws(()=>parse('digraph { A [label="A\\n1"]; }'),/dos bits/);});
+test('acepta atributos y grupos del formato de bombas y rechaza sus entradas de dos bits',()=>{const pumps=fs.readFileSync('deposito-fsm.dot','utf8');assert.throws(()=>parse(pumps),/tres bits/);const m=parse(pumps.replace(/label="([01]{2})"/g,'label="0$1"'));assert.equal(m.outputs.size,6);assert.equal(step(m,'APA','010').state,'B1');});
+test('cambiar el DOT cambia la ejecución y se permiten identificadores entre comillas',()=>{const m=parse('digraph { "A uno" [label="A\\n10"]; B [label="B\\n11"]; "A uno" -> B [label="1xx"]; }');assert.equal(step(m,'A uno','101').output,'11');assert.throws(()=>parse(source+' basura'));});

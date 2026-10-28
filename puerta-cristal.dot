@@ -1,0 +1,19 @@
+digraph Puerta {
+  rankdir=LR;
+  node [shape=circle];
+  inicio [shape=point];
+  inicio -> CERRADA;
+  CERRADA [label="CERRADA\n00"];
+  ABRIENDO [label="ABRIENDO\n10"];
+  ABIERTA [label="ABIERTA\n00"];
+  CERRANDO [label="CERRANDO\n01"];
+  CERRADA -> CERRADA [label="0xx"];
+  CERRADA -> ABRIENDO [label="1xx"];
+  ABRIENDO -> ABRIENDO [label="x0x"];
+  ABRIENDO -> ABIERTA [label="x1x"];
+  ABIERTA -> ABIERTA [label="1xx"];
+  ABIERTA -> CERRANDO [label="0xx"];
+  CERRANDO -> ABRIENDO [label="1xx"];
+  CERRANDO -> CERRANDO [label="0x0"];
+  CERRANDO -> CERRADA [label="0x1"];
+}

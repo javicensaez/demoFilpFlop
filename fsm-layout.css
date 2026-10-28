@@ -1,0 +1,28 @@
+/* Shared editor and presentation layout for the two editable FSM demos. */
+.fsm-demo main{max-width:1800px}.fsm-editor{margin-bottom:20px}.fsm-editor #dot{height:260px;min-height:150px}.fsm-help summary{cursor:pointer;color:var(--green);font-size:12px;font-weight:600}.fsm-help{margin:8px 0}.fsm-go{display:inline-flex;text-decoration:none;margin-top:12px}.fsm-stage{scroll-margin-top:0;padding:12px 0;min-width:0}.fsm-stage-toolbar{display:flex;justify-content:space-between;gap:12px;margin-bottom:10px}.fsm-stage-toolbar a{text-decoration:none}.fsm-stage-grid{display:grid;grid-template-columns:minmax(330px, 2fr) minmax(0,3fr);gap:16px;align-items:stretch}.fsm-diagram{display:flex;flex-direction:column}.fsm-diagram .wiper-graph{flex:1;min-height:0;display:flex;align-items:center;justify-content:center}.fsm-diagram .wiper-graph svg{min-width:0;max-height:none;width:100%;height:100%}.fsm-diagram>.note{margin-bottom:0}.fsm-stage:fullscreen{background:var(--bg);padding:12px 20px;overflow:auto}.fsm-stage:fullscreen .fsm-stage-grid{height:calc(100dvh - 75px)}
+@media(min-width:1000px){
+ .fsm-stage{height:100dvh;min-height:620px;display:flex;flex-direction:column}.fsm-stage-grid{flex:1;min-height:0;height:calc(100dvh - 80px)}
+ .fsm-stage .tank-panel{padding:14px 18px;min-height:0}.fsm-stage h2{font-size:19px;margin-bottom:8px}
+ .fsm-simulation{overflow:auto}.fsm-simulation .windshield,.fsm-simulation .door-view{display:block;width:100%;height:clamp(125px,22dvh,235px);margin:0 auto}
+ .fsm-simulation .tank-readouts{gap:18px;margin:8px 0}.fsm-simulation .tank-readouts output{font-size:22px}.fsm-simulation .tank-readouts span{font-size:11px}
+ .fsm-simulation .tank-controls{gap:8px;margin:9px 0}.fsm-stage .button{padding:9px 12px}.fsm-simulation label{margin-bottom:4px;font-size:12px}.fsm-simulation input[type=range]{margin:2px 0 8px}.fsm-simulation #motion,.fsm-simulation #people-count{margin:6px 0;font-size:12px}.fsm-simulation #feedback{min-height:28px;font-size:12px;line-height:1.4;margin:8px 0}.fsm-simulation select{padding:5px}.fsm-simulation #sensors:not([hidden]){display:flex;flex-wrap:wrap;gap:8px}
+}
+@media(max-width:999px){.fsm-stage-grid{grid-template-columns:1fr}.fsm-diagram .wiper-graph{height:65vw;min-height:300px}.fsm-stage:fullscreen .fsm-stage-grid{height:auto}.fsm-demo .tank-panel{padding:16px}}
+/* The editor and its heading form the first presentation screen. */
+@media(min-width:1000px){
+ .fsm-demo .topbar{height:52px;min-height:52px}
+ .fsm-demo main{padding-top:0}
+ .fsm-edit-screen{height:calc(100dvh - 52px);min-height:520px;display:flex;flex-direction:column;padding-bottom:12px}
+ .fsm-edit-screen .breadcrumb{flex-shrink:0;padding-top:10px}
+ .fsm-edit-screen .intro{flex-shrink:0;padding:12px 0 16px}
+ .fsm-edit-screen .intro h1{font-size:30px}
+ .fsm-edit-screen .intro .eyebrow{margin-bottom:6px}
+ .fsm-edit-screen .intro .lead{margin-top:6px;font-size:12px;line-height:1.5}
+ .fsm-edit-screen .fsm-editor{flex:1;min-height:0;margin-bottom:0;display:flex;flex-direction:column;padding:16px 20px;scroll-margin-top:12px}
+ .fsm-edit-screen .fsm-editor h2{font-size:20px;margin-bottom:8px}
+ .fsm-edit-screen .fsm-editor #dot{flex:1;min-height:100px;height:auto;resize:none;font-size:clamp(13px,1.05vw,17px);line-height:1.5;padding:12px 16px}
+ .fsm-edit-screen .fsm-editor .tank-controls{margin:10px 0 6px;flex-shrink:0}
+ .fsm-edit-screen .fsm-editor .tank-controls .button{padding:9px 14px}
+ .fsm-edit-screen .fsm-editor .fsm-help{flex-shrink:0;margin:4px 0;max-height:100px;overflow:auto}
+ .fsm-edit-screen .fsm-editor .fsm-go{align-self:flex-start;margin-top:6px;padding:9px 14px;flex-shrink:0}
+}

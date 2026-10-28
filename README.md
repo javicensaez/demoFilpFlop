@@ -119,3 +119,9 @@ La ejecución automática se puede pausar y cambiar de velocidad; pausa al termi
 La demo muestra nivel, sensores, bombas, grafo resaltado, tabla completa e historial. El nivel se puede ajustar sin modificar el estado; Aplicar sensores evalúa una transición sin mover el agua. Paso de simulación y el modo automático evalúan sensores y luego actualizan el nivel según las salidas resultantes. El modelo ilustrativo usa umbrales bajo=30% y alto=75%, sensores activos al estar cubiertos, caudal de 8 puntos por bomba y consumo ajustable.
 
 El modo de sensores manuales permite probar todas las combinaciones sin evolución del agua. Una transición no definida en el DOT conserva estado y nivel, muestra una explicación y pausa. No se añaden transiciones para 01, APA/APB con 00 ni ENA/ENB con 11. Reiniciar utiliza el estado inicial elegido, nivel 85% y consumo 6. El motor `tank-logic.js` es independiente del DOM.
+
+### Puerta de cristal con DOT editable
+
+Abre `fsm-puerta-cristal.html` desde la categoría FSM. Las etiquetas de transición siguen el orden personas–puerta abierta–puerta cerrada; las salidas son `00` parado, `10` abrir y `01` cerrar. `11` se rechaza. El ejemplo está en `puerta-cristal.dot`.
+
+Pulsa **Enviar persona** y **Simular**, o activa **Personas aleatorias** para generar llegadas durante la ejecución. Las personas esperan hasta la apertura completa y mantienen activo el sensor durante su paso. La simulación se puede pausar o avanzar paso a paso; el reinicio elimina las personas y desactiva el envío aleatorio. El alumno puede editar o importar DOT y pulsar **Aplicar DOT** para ejecutar su propia máquina.

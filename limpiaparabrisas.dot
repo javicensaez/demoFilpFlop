@@ -1,0 +1,16 @@
+digraph Limpia {
+  rankdir=LR;
+  node [shape=circle];
+  inicio [shape=point];
+  inicio -> PARADO;
+  PARADO [label="PARADO\n00"];
+  IZQUIERDA [label="IZQUIERDA\n10"];
+  DERECHA [label="DERECHA\n01"];
+  PARADO -> PARADO [label="0xx"];
+  PARADO -> IZQUIERDA [label="1xx"];
+  IZQUIERDA -> IZQUIERDA [label="x0x"];
+  IZQUIERDA -> DERECHA [label="x1x"];
+  DERECHA -> DERECHA [label="xx0"];
+  DERECHA -> PARADO [label="0x1"];
+  DERECHA -> IZQUIERDA [label="1x1"];
+}
