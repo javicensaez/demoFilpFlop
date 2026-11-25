@@ -58,7 +58,7 @@ test('rechaza errores de sintaxis, etiquetas y direcciones fuera de sus zonas', 
     ['', 'a: 0'], ['MOV a, a', 'a: 65536'], ['MOV a, a', 'a: -1'],
     ['MOV a, a', 'a: 0\na: 1'], ['x: MOV a, a', 'x: 0\na: 1'],
     ['MOV falta, 100', ''], ['MOV 99, 100', ''], ['MOV 100, 128', ''],
-    ['BEQ 1', ''], ['MOV fin, 100\nfin: BEQ fin', ''], ['BEQ a', 'a: 0'],
+    ['BEQ 1', ''], ['BEQ a', 'a: 0'],
     ['NOP', ''], ['fin:', 'a: 0'], ['MOV 100, 100', 'fin:'],
     [Array(101).fill('MOV 100, 100').join('\n'), ''],
     ['MOV 100, 100', Array(29).fill('0').join('\n')]
@@ -69,4 +69,18 @@ test('permite exactamente 100 instrucciones y 28 datos y reinicia desde los orig
   const state = run(program);
   assert.equal(state.memory[127], 101); assert.equal(state.steps, 100); assert.equal(state.pc, 100);
   assert.equal(initial(program).memory[127], 1); assert.equal(initial(program).z, 0);
+});
+test('ejecuta instrucciones modificadas mediante etiquetas de código', () => {
+  const program = compile(
+    'MOV nueva, objetivo\nobjetivo: ADD valor, salida\nnueva: MOV valor, salida',
+    'valor: 7\nsalida: 2'
+  );
+  const original = initial(program);
+  const patched = step(program, original);
+  assert.equal(patched.event.written, 1);
+  assert.equal(patched.memory[1], original.memory[2]);
+  const executed = step(program, patched);
+  assert.equal(executed.event.content, 'MOV 100, 101');
+  assert.equal(executed.memory[101], 7);
+  assert.equal(initial(program).memory[1], original.memory[1]);
 });
